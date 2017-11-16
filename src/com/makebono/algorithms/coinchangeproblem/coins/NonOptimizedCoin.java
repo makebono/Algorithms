@@ -2,7 +2,7 @@ package com.makebono.algorithms.coinchangeproblem.coins;
 
 /** 
  * @ClassName: Coins 
- * @Description: Enum of coins, non optimized.
+ * @Description: Enum of coins, not optimized.
  * @author makebono
  * @date 2017年11月16日 上午9:34:48 
  *  

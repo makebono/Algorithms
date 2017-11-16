@@ -5,7 +5,7 @@ import com.makebono.algorithms.coinchangeproblem.coins.NonOptimizedCoin;
 /** 
  * @ClassName: GreedyCoinChange 
  * @Description: Greedy approach in virtual cases, does not guarantee optimization. 
- * Same as practical case except value of coin is not practical. 
+ * Same as real life case except value of coin is not practical. 
  * @author makebono
  * @date 2017年11月16日 上午11:40:46 
  *  
