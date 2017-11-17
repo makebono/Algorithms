@@ -1,7 +1,7 @@
 package com.makebono.algorithms.test;
 
-import com.makebono.algorithms.grahamscan.GrahamScan;
-import com.makebono.algorithms.grahamscan.HullContainer;
+import com.makebono.algorithms.computationalgeometry.convexhull.grahamscan.GrahamScan;
+import com.makebono.algorithms.computationalgeometry.convexhull.jarvismarch.JarvisMarch;
 
 /** 
  * @ClassName: TestField 
@@ -23,19 +23,18 @@ public class TestField {
         gs.add(7, 3, -1, 1);
         gs.add(8, 3, -2, 0);
 
-        final HullContainer<Integer> hull = gs.convexHull();
-        gs.convexHull();
-        gs.convexHull();
-        gs.convexHull();
-        gs.convexHull();
-        for (int i = 0; i < hull.getVertices().size(); i++) {
-            System.out.println(hull.getVertices().get(i));
-        }
-
-        for (int i = 0; i < hull.getEdges().size(); i++) {
-            System.out.println(hull.getEdges().get(i));
-        }
-
         System.out.println(gs);
+
+        final JarvisMarch<Integer> jm = new JarvisMarch<Integer>();
+        jm.add(1, 1, 1, -1);
+        jm.add(2, 3, 0.5, -0.5);
+        jm.add(3, 3, 2, 0);
+        jm.add(4, 3, 1, 2);
+        jm.add(5, 3, 1, 1);
+        jm.add(6, 3, 0, 3);
+        jm.add(7, 3, -1, 1);
+        jm.add(8, 3, -2, 0);
+
+        System.out.println(jm);
     }
 }
