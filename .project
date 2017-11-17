@@ -3,6 +3,7 @@
 	<name>Algorithms</name>
 	<comment></comment>
 	<projects>
+		<project>DataStructurePlayland</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

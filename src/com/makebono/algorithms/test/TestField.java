@@ -1,8 +1,7 @@
 package com.makebono.algorithms.test;
 
-import com.makebono.algorithms.coinchangeproblem.DynamicCoinChange;
-import com.makebono.algorithms.coinchangeproblem.GreedyCoinChange;
-import com.makebono.algorithms.coinchangeproblem.RealLifeCoinChange;
+import com.makebono.algorithms.graph.grahamscan.HullContainer;
+import com.makebono.algorithms.graph.grahamscan.GrahamScan;
 
 /** 
  * @ClassName: TestField 
@@ -13,8 +12,30 @@ import com.makebono.algorithms.coinchangeproblem.RealLifeCoinChange;
  */
 public class TestField {
     public static void main(final String[] args) {
-        DynamicCoinChange.change(35);
-        GreedyCoinChange.change(35);
-        RealLifeCoinChange.change(35);
+        final GrahamScan<Integer> gs = new GrahamScan<Integer>();
+
+        gs.add(1, 1, 1, -1);
+        gs.add(2, 3, 0.5, -0.5);
+        gs.add(3, 3, 2, 0);
+        gs.add(4, 3, 1, 2);
+        gs.add(5, 3, 1, 1);
+        gs.add(6, 3, 0, 3);
+        gs.add(7, 3, -1, 1);
+        gs.add(8, 3, -2, 0);
+
+        final HullContainer<Integer> hull = gs.convexHull();
+        gs.convexHull();
+        gs.convexHull();
+        gs.convexHull();
+        gs.convexHull();
+        for (int i = 0; i < hull.getVertices().size(); i++) {
+            System.out.println(hull.getVertices().get(i));
+        }
+
+        for (int i = 0; i < hull.getEdges().size(); i++) {
+            System.out.println(hull.getEdges().get(i));
+        }
+
+        System.out.println(gs);
     }
 }
