@@ -1,7 +1,7 @@
 package com.makebono.algorithms.test;
 
-import com.makebono.algorithms.graph.grahamscan.HullContainer;
-import com.makebono.algorithms.graph.grahamscan.GrahamScan;
+import com.makebono.algorithms.grahamscan.GrahamScan;
+import com.makebono.algorithms.grahamscan.HullContainer;
 
 /** 
  * @ClassName: TestField 

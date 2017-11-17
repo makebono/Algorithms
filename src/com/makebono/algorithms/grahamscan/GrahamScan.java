@@ -1,4 +1,4 @@
-package com.makebono.algorithms.graph.grahamscan;
+package com.makebono.algorithms.grahamscan;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
