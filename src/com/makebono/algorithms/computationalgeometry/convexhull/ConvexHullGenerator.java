@@ -33,7 +33,7 @@ public abstract class ConvexHullGenerator<T> {
 
     // Vertex with minimum y value / at the bottom of the graph. If several bottom lying vertices exist, pick the left
     // most one.
-    protected Vertex<T> minimumY() {
+    public Vertex<T> minimumY() {
         Vertex<T> target = this.getGraph().getVertices().get(0);
 
         for (final Vertex<T> temp : this.getGraph().getVertices()) {

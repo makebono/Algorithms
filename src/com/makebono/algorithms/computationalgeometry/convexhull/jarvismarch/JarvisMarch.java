@@ -6,8 +6,8 @@ import java.util.Queue;
 
 import com.makebono.algorithms.computationalgeometry.convexhull.ConvexHullGenerator;
 import com.makebono.datastructures.graph.Vertex;
-import com.makebono.datastructures.tools.polaranglecomparator.Clockwised;
-import com.makebono.datastructures.tools.polaranglecomparator.CounterClockwised;
+import com.makebono.datastructures.tools.polaranglecomparator.CounterClockwisedScan;
+import com.makebono.datastructures.tools.polaranglecomparator.InvertedScan;
 
 /** 
  * @ClassName: JarvisMarch 
@@ -20,7 +20,7 @@ public class JarvisMarch<T> extends ConvexHullGenerator<T> {
 
     @Override
     protected ArrayList<Vertex<T>> candidates() {
-        Queue<Vertex<T>> unvisited = new PriorityQueue<Vertex<T>>(new CounterClockwised<T>(this.minimumY()));
+        Queue<Vertex<T>> unvisited = new PriorityQueue<Vertex<T>>(new CounterClockwisedScan<T>(this.minimumY()));
 
         // For vertices output.
         final ArrayList<Vertex<T>> vertices = new ArrayList<Vertex<T>>();
@@ -35,42 +35,55 @@ public class JarvisMarch<T> extends ConvexHullGenerator<T> {
         vertices.add(this.minimumY());
         vertices.add(unvisited.poll());
         Vertex<T> cursor = vertices.get(vertices.size() - 1);
-
-        // Counter clockwised scan the graph until reach the top vertex. This complete the right half of the hull.
-        while (cursor.getIndex() != this.maximumY().getIndex()) {
-            final ArrayList<Vertex<T>> temp = new ArrayList<Vertex<T>>();
-            temp.addAll(unvisited);
-            unvisited = new PriorityQueue<Vertex<T>>(new CounterClockwised<T>(cursor));
-            unvisited.addAll(temp);
-
-            vertices.add(unvisited.poll());
-            cursor = vertices.get(vertices.size() - 1);
-        }
-        // System.out.println(unvisited);
-
-        unvisited.add(this.maximumY());
         ArrayList<Vertex<T>> temp = new ArrayList<Vertex<T>>();
-        temp.addAll(unvisited);
-        unvisited = new PriorityQueue<Vertex<T>>(new Clockwised<T>(this.minimumY()));
-        unvisited.addAll(temp);
+        temp.add(this.minimumY());
+        // System.out.println(cursor.getIndex());
 
-        vertices.add(unvisited.poll());
-
-        // Add the top vertex back and then scan the graph clockwised until reached the top vertex. This complete the
-        // left half of convex hull.
         while (cursor.getIndex() != this.maximumY().getIndex()) {
             temp = new ArrayList<Vertex<T>>();
             temp.addAll(unvisited);
-            unvisited = new PriorityQueue<Vertex<T>>(new Clockwised<T>(cursor));
+            unvisited = new PriorityQueue<Vertex<T>>(new CounterClockwisedScan<T>(cursor));
+            unvisited.addAll(temp);
+
+            vertices.add(unvisited.poll());
+            cursor = vertices.get(vertices.size() - 1);
+            // System.out.println(cursor.getIndex());
+        }
+
+        System.out.println(cursor + " is current cursor \n");
+
+        temp = new ArrayList<Vertex<T>>();
+        temp.addAll(unvisited);
+        temp.add(this.minimumY());
+        unvisited = new PriorityQueue<Vertex<T>>(new InvertedScan<T>(cursor));
+        unvisited.addAll(temp);
+
+        /*
+        final int size = unvisited.size();
+        for (int i = 0; i < size; i++) {
+            System.out.println(unvisited.poll());
+        }
+        */
+
+        // and then reverse the axis when reaching the top vertex. Scan the graph until reached bottom (minimumY)
+        // vertex.
+        while (cursor.getIndex() != this.minimumY().getIndex()) {
+            temp = new ArrayList<Vertex<T>>();
+            temp.addAll(unvisited);
+            unvisited = new PriorityQueue<Vertex<T>>(new InvertedScan<T>(cursor));
             unvisited.addAll(temp);
 
             vertices.add(unvisited.poll());
             cursor = vertices.get(vertices.size() - 1);
         }
+
+        // Remove the redundant bottom vertex.
+        vertices.remove(vertices.size() - 1);
 
         for (int i = 0; i < vertices.size() - 1; i++) {
             this.getGraph().add(vertices.get(i), vertices.get(i + 1));
         }
+
         this.getGraph().add(vertices.get(vertices.size() - 1), vertices.get(0));
 
         return vertices;

@@ -7,7 +7,7 @@ import java.util.Stack;
 
 import com.makebono.algorithms.computationalgeometry.convexhull.ConvexHullGenerator;
 import com.makebono.datastructures.graph.Vertex;
-import com.makebono.datastructures.tools.polaranglecomparator.CounterClockwised;
+import com.makebono.datastructures.tools.polaranglecomparator.CounterClockwisedScan;
 
 /** 
  * @ClassName: GrahamScan 
@@ -21,7 +21,7 @@ public class GrahamScan<T> extends ConvexHullGenerator<T> {
 
     @Override
     protected ArrayList<Vertex<T>> candidates() {
-        final CounterClockwised<T> sideKick = new CounterClockwised<T>(this.minimumY());
+        final CounterClockwisedScan<T> sideKick = new CounterClockwisedScan<T>(this.minimumY());
         final Queue<Vertex<T>> unvisited = new PriorityQueue<Vertex<T>>(sideKick);
         final Stack<Vertex<T>> candidates = new Stack<Vertex<T>>();
 
@@ -67,7 +67,7 @@ public class GrahamScan<T> extends ConvexHullGenerator<T> {
         return vertices;
     }
 
-    // If dot product of two vertex(geometrically speaking, means vertices on a shape) v1 v2 is larger than 0, then it
+    // If cross product of two vertex(geometrically speaking, means vertices on a shape) v1 v2 is larger than 0, then it
     // means v1 is at the right side of v2.
     private boolean leftTurn(final Vertex<T> nextCandidate, final Vertex<T> top1, final Vertex<T> top2) {
         boolean left = false;
