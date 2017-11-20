@@ -50,7 +50,7 @@ public class JarvisMarch<T> extends ConvexHullGenerator<T> {
             // System.out.println(cursor.getIndex());
         }
 
-        System.out.println(cursor + " is current cursor \n");
+        // System.out.println(cursor + " is current cursor \n");
 
         temp = new ArrayList<Vertex<T>>();
         temp.addAll(unvisited);
