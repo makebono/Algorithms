@@ -7,7 +7,7 @@ import java.util.Stack;
 
 import com.makebono.algorithms.computationalgeometry.convexhull.ConvexHullGenerator;
 import com.makebono.datastructures.graph.Vertex;
-import com.makebono.datastructures.tools.polaranglecomparator.CounterClockwisedScan;
+import com.makebono.datastructures.tools.polaranglecomparator.CrossProductComparator;
 
 /** 
  * @ClassName: GrahamScan 
@@ -21,7 +21,7 @@ public class GrahamScan<T> extends ConvexHullGenerator<T> {
 
     @Override
     protected ArrayList<Vertex<T>> candidates() {
-        final CounterClockwisedScan<T> sideKick = new CounterClockwisedScan<T>(this.minimumY());
+        final CrossProductComparator<T> sideKick = new CrossProductComparator<T>(this.minimumY());
         final Queue<Vertex<T>> unvisited = new PriorityQueue<Vertex<T>>(sideKick);
         final Stack<Vertex<T>> candidates = new Stack<Vertex<T>>();
 

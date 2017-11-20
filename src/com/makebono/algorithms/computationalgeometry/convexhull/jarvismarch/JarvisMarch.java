@@ -6,7 +6,7 @@ import java.util.Queue;
 
 import com.makebono.algorithms.computationalgeometry.convexhull.ConvexHullGenerator;
 import com.makebono.datastructures.graph.Vertex;
-import com.makebono.datastructures.tools.polaranglecomparator.CounterClockwisedScan;
+import com.makebono.datastructures.tools.polaranglecomparator.CrossProductComparator;
 import com.makebono.datastructures.tools.polaranglecomparator.InvertedScan;
 
 /** 
@@ -20,7 +20,7 @@ public class JarvisMarch<T> extends ConvexHullGenerator<T> {
 
     @Override
     protected ArrayList<Vertex<T>> candidates() {
-        Queue<Vertex<T>> unvisited = new PriorityQueue<Vertex<T>>(new CounterClockwisedScan<T>(this.minimumY()));
+        Queue<Vertex<T>> unvisited = new PriorityQueue<Vertex<T>>(new CrossProductComparator<T>(this.minimumY()));
 
         // For vertices output.
         final ArrayList<Vertex<T>> vertices = new ArrayList<Vertex<T>>();
@@ -34,15 +34,17 @@ public class JarvisMarch<T> extends ConvexHullGenerator<T> {
 
         vertices.add(this.minimumY());
         vertices.add(unvisited.poll());
+
         Vertex<T> cursor = vertices.get(vertices.size() - 1);
         ArrayList<Vertex<T>> temp = new ArrayList<Vertex<T>>();
         temp.add(this.minimumY());
+
         // System.out.println(cursor.getIndex());
 
         while (cursor.getIndex() != this.maximumY().getIndex()) {
             temp = new ArrayList<Vertex<T>>();
             temp.addAll(unvisited);
-            unvisited = new PriorityQueue<Vertex<T>>(new CounterClockwisedScan<T>(cursor));
+            unvisited = new PriorityQueue<Vertex<T>>(new CrossProductComparator<T>(cursor));
             unvisited.addAll(temp);
 
             vertices.add(unvisited.poll());
@@ -57,14 +59,12 @@ public class JarvisMarch<T> extends ConvexHullGenerator<T> {
         temp.add(this.minimumY());
         unvisited = new PriorityQueue<Vertex<T>>(new InvertedScan<T>(cursor));
         unvisited.addAll(temp);
-
         /*
         final int size = unvisited.size();
         for (int i = 0; i < size; i++) {
             System.out.println(unvisited.poll());
         }
         */
-
         // and then reverse the axis when reaching the top vertex. Scan the graph until reached bottom (minimumY)
         // vertex.
         while (cursor.getIndex() != this.minimumY().getIndex()) {
