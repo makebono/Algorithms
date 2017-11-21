@@ -1,7 +1,6 @@
 package com.makebono.algorithms.test;
 
-import com.makebono.algorithms.computationalgeometry.convexhull.grahamscan.GrahamScan;
-import com.makebono.algorithms.computationalgeometry.convexhull.jarvismarch.JarvisMarch;
+import com.makebono.algorithms.hungarianalgorithm.HungarianWorkDistributor;
 
 /** 
  * @ClassName: TestField 
@@ -12,25 +11,46 @@ import com.makebono.algorithms.computationalgeometry.convexhull.jarvismarch.Jarv
  */
 public class TestField {
     public static void main(final String[] args) {
-        final GrahamScan<Integer> gs = new GrahamScan<Integer>();
+        final HungarianWorkDistributor hwd = new HungarianWorkDistributor(4, 4);
 
-        gs.add(1, 1, 3, -3);
-        gs.add(2, 3, 0.5, 0.5);
-        gs.add(3, 3, 3, 0);
-        gs.add(4, 3, 0, 3);
-        gs.add(5, 3, -2, 1);
-        gs.add(6, 3, -1.5, -2);
+        hwd.solve();
 
-        System.out.println(gs);
-
-        final JarvisMarch<Integer> jm = new JarvisMarch<Integer>();
-        jm.add(1, 1, 3, -3);
-        jm.add(2, 3, 0.5, 0.5);
-        jm.add(3, 3, 3, 0);
-        jm.add(4, 3, 0, 3);
-        jm.add(5, 3, -2, 1);
-        jm.add(6, 3, -1.5, -2);
-
-        System.out.println(jm);
+        /*
+        final int[][] w = new int[4][4];
+        final int[] w1 = { 0, 3, 0, 5 };
+        final int[] w2 = { 7, 1, 0, 6 };
+        final int[] w3 = { 3, 2, 1, 0 };
+        final int[] w4 = { 1, 1, 0, 1 };
+        
+        w[0] = w1;
+        w[1] = w2;
+        w[2] = w3;
+        w[3] = w4;
+        
+        for (int i = 0; i < w.length; i++) {
+            for (int o = 0; o < w[0].length; o++) {
+                System.out.print(w[i][o] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        final int[][] draw = HungarianWorkDistributor.draw(w);
+        for (int i = 0; i < draw.length; i++) {
+            for (int o = 0; o < draw[0].length; o++) {
+                System.out.print(draw[i][o] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        HungarianWorkDistributor.updateTempTable(w, draw);
+        
+        for (int i = 0; i < w.length; i++) {
+            for (int o = 0; o < w[0].length; o++) {
+                System.out.print(w[i][o] + " ");
+            }
+            System.out.println();
+        }
+        */
     }
+
 }
