@@ -171,6 +171,9 @@ public class HungarianWorkDistributor {
     }
 
     // Line drawing method.
+    // Notice there's a role change for the int[][] draw table. Before drawing lines, It is for the dummy assignment
+    // distribution, assigned entries in rows would be set to 1. And in the lines drawing part, this table becomes lines
+    // representing table. 1 is stands for lines now, and 2 means such entry is covered by 2 lines.
     private static int[][] draw(final int[][] temp) {
         final int[][] draw = new int[temp.length][temp[0].length];
         boolean conflict = false;
