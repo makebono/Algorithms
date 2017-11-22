@@ -1,6 +1,8 @@
 package com.makebono.algorithms.test;
 
-import com.makebono.algorithms.hungarianalgorithm.HungarianWorkDistributor;
+import java.io.FileNotFoundException;
+
+import com.makebono.algorithms.greedyalgorithm.huffmancoding.HuffmanCoding;
 
 /** 
  * @ClassName: TestField 
@@ -10,10 +12,9 @@ import com.makebono.algorithms.hungarianalgorithm.HungarianWorkDistributor;
  *  
  */
 public class TestField {
-    public static void main(final String[] args) {
-        final HungarianWorkDistributor hwd = new HungarianWorkDistributor(4);
-
-        hwd.solve();
+    public static void main(final String[] args) throws FileNotFoundException {
+        final HuffmanCoding hc = new HuffmanCoding();
+        hc.encode("huffmaninput.txt");
 
         /*
         final int[][] w = new int[4][4];
