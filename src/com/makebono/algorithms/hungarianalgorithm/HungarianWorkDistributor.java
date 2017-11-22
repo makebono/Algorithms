@@ -43,7 +43,11 @@
  *                                          (2,0)   (2,0)(2,0)   (2,0)
  * 
  * You can do DFS or BFS or any search you like for the solution. If no conflict on the n value on a path from top down to bottom, 
- * it is a available solution. If there's no solution, do the line drawing part again.                                               
+ * it is a available solution. If there's no solution, do the line drawing part again.   
+ * 
+ * Instruction: 
+ *     final HungarianWorkDistributor hwd = new HungarianWorkDistributor(4);
+ *     hwd.solve();                                            
  */
 package com.makebono.algorithms.hungarianalgorithm;
 

@@ -1,3 +1,6 @@
+/**Instruction:
+ *     DynamicCoinChange.change(50); 
+ */
 package com.makebono.algorithms.dynamicprogramming.dynamiccoinchangeproblem;
 
 import com.makebono.algorithms.tools.coins.NonOptimizedCoin;

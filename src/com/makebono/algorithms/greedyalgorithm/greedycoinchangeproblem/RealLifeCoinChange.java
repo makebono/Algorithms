@@ -1,3 +1,6 @@
+/**Instruction:
+ *     RealLifeCoinChange.change(10.24); 
+ */
 package com.makebono.algorithms.greedyalgorithm.greedycoinchangeproblem;
 
 import java.math.BigDecimal;

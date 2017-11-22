@@ -1,3 +1,6 @@
+/**Instruction:
+ *     GreedyCoinChange.change(50);
+ */
 package com.makebono.algorithms.greedyalgorithm.greedycoinchangeproblem;
 
 import com.makebono.algorithms.tools.coins.NonOptimizedCoin;

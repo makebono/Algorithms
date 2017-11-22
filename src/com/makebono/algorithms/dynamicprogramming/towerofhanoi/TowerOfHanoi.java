@@ -1,9 +1,13 @@
-/*Notes:
+/**Notes:
  * 1. The algorithm itself is straight forward, but output format takes times to handle with.
  * 2. The algorithm is: S(n,h,t) = S(n-1,h, not(h,t)) ; S(1,h,t) ; S(n-1,not(h,t),t). 
  * 3. n is the height, h is home rod while t is the target. Not(h,t) expressed as auxiliary rod here. Every step follows this instruction.
  * 3. Comlexity is 2^n - 1, and no table can do help here, because every state(step) would be different.
  * 4. Printing steps through recursion is hard to deal with, so use a set to erase repeated step would help. And LinkedHashSet can maintain the order of input, where TreeSet doesn't.  
+ * 
+ * Instruction:
+ *     final TowerOfHanoi toh = new TowerOfHanoi(7);
+ *     toh.game(7, 1, 3);
  */
 package com.makebono.algorithms.dynamicprogramming.towerofhanoi;
 

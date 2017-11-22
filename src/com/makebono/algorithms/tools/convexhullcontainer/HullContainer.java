@@ -1,4 +1,4 @@
-package com.makebono.algorithms.computationalgeometry.convexhull.tools;
+package com.makebono.algorithms.tools.convexhullcontainer;
 
 import java.util.ArrayList;
 

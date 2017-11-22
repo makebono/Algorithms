@@ -2,7 +2,7 @@ package com.makebono.algorithms.computationalgeometry.convexhull;
 
 import java.util.ArrayList;
 
-import com.makebono.algorithms.computationalgeometry.convexhull.tools.HullContainer;
+import com.makebono.algorithms.tools.convexhullcontainer.HullContainer;
 import com.makebono.datastructures.graph.BonoGraph;
 import com.makebono.datastructures.graph.Edge;
 import com.makebono.datastructures.graph.Vertex;
