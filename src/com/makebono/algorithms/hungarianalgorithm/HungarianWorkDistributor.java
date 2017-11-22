@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import com.makebono.algorithms.hungarianalgorithm.tools.HungarianNode;
-import com.makebono.algorithms.hungarianalgorithm.tools.HungarianTree;
+import com.makebono.datastructures.hungariantree.HungarianNode;
+import com.makebono.datastructures.hungariantree.HungarianTree;
 import com.makebono.datastructures.matrix.matrix.BonoMatrix2D;
 import com.makebono.datastructures.matrix.matrixinterface.Matrix;
 
@@ -124,9 +124,9 @@ public class HungarianWorkDistributor {
         Arrays.fill(markedCol, 1);
         Arrays.fill(markedRow, 0);
 
-        boolean newRowTicked = false;
+        boolean newRowMarked = false;
 
-        // 1. Scan through the matrix and check assignable work from top to bottom. Avoid conflict and mark
+        // Scan through the matrix and check assignable work from top to bottom. Avoid conflict and mark
         // unassigned rows.
         for (int i = 0; i < temp.length; i++) {
             conflict = false;
@@ -148,12 +148,14 @@ public class HungarianWorkDistributor {
             }
             if (conflict) {
                 markedRow[i] = 1;
-                newRowTicked = true;
+                newRowMarked = true;
             }
         }
 
         // Modify here.
-        while (newRowTicked) {
+        while (newRowMarked) {
+            newRowMarked = false;
+            final int[] tempRowMarked = Arrays.copyOf(markedRow, markedRow.length);
             /*
             for (int i = 0; i < markedRow.length; i++) {
                 System.out.println(markedRow[i]);
@@ -167,7 +169,7 @@ public class HungarianWorkDistributor {
             }
             */
 
-            // 2. Scan through the unassigned rows and try to mark relative columns.
+            // Scan through the unassigned rows and try to mark relative columns.
             for (int i = 0; i < markedRow.length; i++) {
                 if (markedRow[i] == 1) {
                     for (int o = 0; o < markedCol.length; o++) {
@@ -184,7 +186,7 @@ public class HungarianWorkDistributor {
             }
             */
 
-            // 3. Mark rows having assignments in columns marked above.
+            // Mark rows having assignments in columns marked above.
             for (int o = 0; o < markedCol.length; o++) {
                 if (markedCol[o] == 0) {
                     for (int i = 0; i < markedRow.length; i++) {
@@ -203,6 +205,11 @@ public class HungarianWorkDistributor {
                 System.out.println(markedCol[i]);
             }
             */
+
+            if (!Arrays.equals(markedRow, tempRowMarked)) {
+                newRowMarked = true;
+                System.out.println("boo!");
+            }
         }
 
         // These 3 steps finished the marking part. Below goes the drawing part.
