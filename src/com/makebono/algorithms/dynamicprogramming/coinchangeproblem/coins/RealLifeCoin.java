@@ -1,4 +1,4 @@
-package com.makebono.algorithms.coinchangeproblem.coins;
+package com.makebono.algorithms.dynamicprogramming.coinchangeproblem.coins;
 
 import java.math.BigDecimal;
 

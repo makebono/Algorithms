@@ -1,6 +1,6 @@
-package com.makebono.algorithms.coinchangeproblem;
+package com.makebono.algorithms.dynamicprogramming.coinchangeproblem;
 
-import com.makebono.algorithms.coinchangeproblem.coins.NonOptimizedCoin;
+import com.makebono.algorithms.dynamicprogramming.coinchangeproblem.coins.NonOptimizedCoin;
 
 /** 
  * @ClassName: DynamicCoinChange 
