@@ -1,3 +1,50 @@
+/**Notes:
+ * This is an easy but practically useful algorithm, and funny to implement. It takes o(n^3) time complexity for solving problem.
+ * A 2-D matrix is used for storing the input time cost. Nothing special about the matrix. Each row is considered as worker, column
+ * is time cost for worker per job. Number of job should equal to number of worker. And if it's needed for implement a case when 
+ * jobs less than number of worker, you need to assign dummy value at blank entry, this usually be the maximum cost. 
+ * So now we have the matrix input, 'interpret' it following by the instruction(line drawing part), goes like below:
+ * 
+ *     1. Subtract miminum value from each row.
+ *     2. Subtract minimum value from each column.
+ *     3. Assign the jobs to each row. This means if a 0 appears, it is assignable. And if multiple 0s appears, pick an available
+ *        entry and cross out other 0s in row. In each column, from top to bottom, if an entry is assigned above, entries below
+ *        are also to be crossed out. If all rows assigned, it's the optimal solution.
+ *     4. If not all rows assigned, tick every non assigned rows.
+ *     5. Tick every column has 0 in ticked rows.
+ *     6. Tick every row has assignment in ticked columns. Be careful, 'assignment', not 0s. So do not mess with corssed out 0s. 
+ *     7. After all ticking step, draw lines at ticked columns and unticked rows. These lines will cover all 0s and the number of
+ *        lines is minimum. Find minimum value in uncovered part and subtract it from every uncovered slot, add it to every entry
+ *        covered by 2 lines.
+ * 
+ * In this implementation, I use a 2-D look-up table with 1s and 0s represents the lines. With help with two 1-D array of ticked 
+ * rows and ticked columns.        
+ * Repeat step 5~6 until no more new rows ticked, and do step 7. The table will have bunch of 0s represent the possible assignment.
+ * May have multiple zero in a row. Then this table is ready to be threw in the solution tree.     
+ *             
+ * A tree is used for finding solution. In this particular tree, every node is possible assignment(0s) and every layer would be 
+ * each row in the look-up table. Every sibling node in same layer is assignable column in a row in the look-up table. Every 
+ * assignable slot in a row takes all assignable slots in next row as children. An example shows below.          
+ *                       
+ *                                                   Table:
+ *                                                   [5,0,0
+ *                                                    0,1,0
+ *                                                    0,8,3]
+ *                                                    
+ *                                        Tree derived from table above:
+ *                                                  (-1 , -1)  <---Dummy root. Index it anyway you want.
+ *                                                   /      \
+ *                                                  /        \
+ *                                               (0,1)      (0,2)
+ *                                                /\          /\
+ *                                               /  \        /  \
+ *                                            (1,0)(1,2)  (1,0)(1,2)
+ *                                             /      \    /      \
+ *                                          (2,0)   (2,0)(2,0)   (2,0)
+ * 
+ * You can do DFS or BFS or any search you like for the solution. If no conflict on the n value on a path from top down to bottom, 
+ * it is a available solution. If there's no solution, do the line drawing part again.                                               
+ */
 package com.makebono.algorithms.hungarianalgorithm;
 
 import java.util.ArrayList;
@@ -11,13 +58,15 @@ import com.makebono.datastructures.matrix.matrixinterface.Matrix;
 
 /** 
  * @ClassName: HungarianWorkDistributor 
- * @Description: Assign work by Hungarian algorithm.
+ * @Description: Assign work by Hungarian algorithm. 
  * @author makebono
  * @date 2017年11月20日 下午4:30:15 
  *  
  */
 public class HungarianWorkDistributor {
     private final Matrix table;
+
+    // Use it workerNum is to be equal as workNum, but I'm too lazy to change it.
     private int workerNum;
     private int workNum;
     private final int workerCapacity;
@@ -25,21 +74,25 @@ public class HungarianWorkDistributor {
     private final String[] workerList;
     private final String[] workList;
 
-    public HungarianWorkDistributor(final int workerCapacity, final int workCapacity) {
-        this.table = new BonoMatrix2D(workerCapacity, workCapacity);
-        this.workerCapacity = workerCapacity;
-        this.workCapacity = workCapacity;
+    public HungarianWorkDistributor(final int size) {
+        this.table = new BonoMatrix2D(size, size);
+        this.workerCapacity = size;
+        this.workCapacity = size;
         this.workerList = new String[workerCapacity];
         this.workList = new String[workCapacity];
         this.workerNum = 0;
         this.workNum = 0;
 
+        // Initialize the matrix.
         this.situationWizard();
     }
 
     public void solve() {
+        // Get a clone table for mess around with. Because you don't want change the original data. They are needed for
+        // output calculation.
         final int[][] temp = this.getTable().cloneMatrix();
 
+        // 1. Subtract miminum value from each row.
         for (int i = 0; i < temp.length; i++) {
             int tempMin = temp[i][0];
             for (final int buffer : temp[i]) {
@@ -52,6 +105,7 @@ public class HungarianWorkDistributor {
             }
         }
 
+        // 2. Subtract miminum value from each column.
         for (int i = 0; i < temp[0].length; i++) {
             int tempMin = temp[0][i];
             for (int o = 0; o < temp[0].length; o++) {
@@ -64,13 +118,16 @@ public class HungarianWorkDistributor {
             }
         }
 
+        /*
         for (int i = 0; i < temp.length; i++) {
             for (final int cursor : temp[i]) {
                 System.out.print(cursor + " ");
             }
             System.out.println();
         }
+        */
 
+        // Throw the table in tree to see if there's solution.
         boolean optimized = false;
         HungarianTree solution = new HungarianTree(temp.length);
         solution.buildTree(temp);
@@ -89,16 +146,19 @@ public class HungarianWorkDistributor {
         }
         */
 
+        // If not, do the drawing part, iterate until solution found.
         while (!optimized) {
             final int[][] draw = HungarianWorkDistributor.draw(temp);
             HungarianWorkDistributor.updateTempTable(temp, draw);
 
+            /*
             for (int i = 0; i < temp.length; i++) {
                 for (final int cursor : temp[i]) {
                     System.out.print(cursor + " ");
                 }
                 System.out.println();
             }
+            */
 
             solution = new HungarianTree(temp.length);
             solution.buildTree(temp);
@@ -110,8 +170,8 @@ public class HungarianWorkDistributor {
         this.printAnswer(answer);
     }
 
-    // Needs to tick column for not only the first unassigned row, but also following rows ticked by columns.
-    public static int[][] draw(final int[][] temp) {
+    // Line drawing method.
+    private static int[][] draw(final int[][] temp) {
         final int[][] draw = new int[temp.length][temp[0].length];
         boolean conflict = false;
         final int[] markedRow = new int[temp.length];
@@ -152,7 +212,7 @@ public class HungarianWorkDistributor {
             }
         }
 
-        // Modify here.
+        // Do this until no new row ticked.
         while (newRowMarked) {
             newRowMarked = false;
             final int[] tempRowMarked = Arrays.copyOf(markedRow, markedRow.length);
@@ -208,22 +268,23 @@ public class HungarianWorkDistributor {
 
             if (!Arrays.equals(markedRow, tempRowMarked)) {
                 newRowMarked = true;
-                System.out.println("boo!");
+                // System.out.println("boo!");
             }
         }
 
-        // These 3 steps finished the marking part. Below goes the drawing part.
-
+        // These steps finished the ticking part. Below goes the drawing part.
         for (int i = 0; i < draw.length; i++) {
             Arrays.fill(draw[i], 0);
         }
 
+        // Draw lines horizontally.
         for (int i = 0; i < draw.length; i++) {
             if (markedRow[i] == 0) {
                 Arrays.fill(draw[i], 1);
             }
         }
 
+        // Draw lines vertically.
         for (int o = 0; o < draw[0].length; o++) {
             if (markedCol[o] == 0) {
                 for (int i = 0; i < draw.length; i++) {
@@ -235,7 +296,8 @@ public class HungarianWorkDistributor {
         return draw;
     }
 
-    public static int unselectedRegionMin(final int[][] table, final int[][] draw) {
+    // Return minimum value in uncovered(by lines) region.
+    private static int unselectedRegionMin(final int[][] table, final int[][] draw) {
         int min = Integer.MAX_VALUE;
         for (int i = 0; i < table.length; i++) {
             for (int o = 0; o < table[0].length; o++) {
@@ -248,7 +310,8 @@ public class HungarianWorkDistributor {
         return min;
     }
 
-    public static void updateTempTable(final int[][] table, final int[][] draw) {
+    // Use the line drawing table to update the original table following by instruction.
+    private static void updateTempTable(final int[][] table, final int[][] draw) {
         final int unselectedRegionMin = HungarianWorkDistributor.unselectedRegionMin(table, draw);
 
         for (int i = 0; i < table.length; i++) {
@@ -257,6 +320,7 @@ public class HungarianWorkDistributor {
                     table[i][o] -= unselectedRegionMin;
                 }
 
+                // draw[i][o] == 2 means covered by 2 lines.
                 if (draw[i][o] == 2) {
                     table[i][o] += unselectedRegionMin;
                 }
@@ -304,13 +368,13 @@ public class HungarianWorkDistributor {
 
         while (this.workerNum != this.workerCapacity) {
             System.out.printf("\n    Input your next worker's name: ");
-            this.addWorker(sc.next());
+            this.addWorker(sc.nextLine());
         }
 
-        System.out.printf("\n\nPlease enter your works' names");
+        System.out.printf("\n\nPlease enter your jobs' names");
         while (this.workNum != this.workCapacity) {
-            System.out.printf("\n    Input your next work's name: ");
-            this.addWork(sc.next());
+            System.out.printf("\n    Input your next job's name: ");
+            this.addWork(sc.nextLine());
         }
 
         System.out.printf("\n\nPlease enter the costs of works for each worker");
@@ -326,24 +390,45 @@ public class HungarianWorkDistributor {
     }
 
     private void printAnswer(final ArrayList<HungarianNode> answer) {
+        System.out.println(this.toString() + "\n");
         System.out.println("Optimal solution found. Shows below:");
-        for (final HungarianNode cursor : answer) {
-            System.out.println("(" + cursor.getM() + ", " + cursor.getN() + ")");
+
+        int cost = 0;
+        for (int i = answer.size() - 1; i != -1; i--) {
+            System.out.println(this.getWorkerList()[answer.get(i).getM()] + " does "
+                    + this.getWorkList()[answer.get(i).getN()] + ".");
+            cost += this.getTable().get(answer.get(i).getM(), answer.get(i).getN()).getValue();
         }
+        System.out.println("The optimal cost is: " + cost);
     }
 
     // Align this later.
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
+
         sb.append("Situation is like below: \n            ");
         for (int i = 0; i < this.workCapacity; i++) {
-            sb.append(this.getWorkList()[i] + "    ");
+            final StringBuilder subSb = new StringBuilder();
+            subSb.setLength(20);
+
+            for (int n = 0; n < this.getWorkList()[i].length(); n++) {
+                subSb.setCharAt(n, this.getWorkList()[i].charAt(n));
+            }
+
+            sb.append(subSb.toString());
         }
         for (int i = 0; i < this.workerCapacity; i++) {
-            sb.append("\n    " + this.getWorkerList()[i] + "    ");
+            final StringBuilder subSb = new StringBuilder();
+            subSb.setLength(8);
+
+            for (int n = 0; n < this.getWorkerList()[i].length(); n++) {
+                subSb.setCharAt(n, this.getWorkerList()[i].charAt(n));
+            }
+            sb.append("\n    ");
+            sb.append(subSb.toString());
             for (int n = 0; n < this.workCapacity; n++) {
-                sb.append(this.getTable().get(i, n).getValue() + "    ");
+                sb.append("         " + this.getTable().get(i, n).getValue() + "         ");
             }
         }
 

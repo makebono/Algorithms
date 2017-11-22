@@ -11,7 +11,7 @@ import com.makebono.algorithms.hungarianalgorithm.HungarianWorkDistributor;
  */
 public class TestField {
     public static void main(final String[] args) {
-        final HungarianWorkDistributor hwd = new HungarianWorkDistributor(4, 4);
+        final HungarianWorkDistributor hwd = new HungarianWorkDistributor(4);
 
         hwd.solve();
 
@@ -53,5 +53,4 @@ public class TestField {
         */
 
     }
-
 }
