@@ -405,7 +405,6 @@ public class HungarianWorkDistributor {
         System.out.println("The optimal cost is: " + cost);
     }
 
-    // Align this later.
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
