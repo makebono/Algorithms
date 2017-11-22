@@ -1,4 +1,4 @@
-package com.makebono.algorithms.pathfinder.astaralgorithm.tools;
+package com.makebono.algorithms.tools.astarcomparators;
 
 import java.util.Comparator;
 

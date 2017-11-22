@@ -3,7 +3,7 @@ package com.makebono.algorithms.pathfinder.astaralgorithm;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
-import com.makebono.algorithms.pathfinder.astaralgorithm.tools.GComparator;
+import com.makebono.algorithms.tools.astarcomparators.GComparator;
 
 /** 
  * @ClassName: Node 

@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-import com.makebono.algorithms.pathfinder.astaralgorithm.tools.FComparator;
+import com.makebono.algorithms.tools.astarcomparators.FComparator;
 
 /** 
  * @ClassName: AStarPathFinder 

@@ -1,6 +1,6 @@
-package com.makebono.algorithms.dynamicprogramming.coinchangeproblem;
+package com.makebono.algorithms.greedyalgorithm.greedycoinchangeproblem;
 
-import com.makebono.algorithms.dynamicprogramming.coinchangeproblem.coins.NonOptimizedCoin;
+import com.makebono.algorithms.tools.coins.NonOptimizedCoin;
 
 /** 
  * @ClassName: GreedyCoinChange 

@@ -1,8 +1,8 @@
-package com.makebono.algorithms.dynamicprogramming.coinchangeproblem;
+package com.makebono.algorithms.greedyalgorithm.greedycoinchangeproblem;
 
 import java.math.BigDecimal;
 
-import com.makebono.algorithms.dynamicprogramming.coinchangeproblem.coins.RealLifeCoin;
+import com.makebono.algorithms.tools.coins.RealLifeCoin;
 
 /** 
  * @ClassName: RealLifeCoinChange 
