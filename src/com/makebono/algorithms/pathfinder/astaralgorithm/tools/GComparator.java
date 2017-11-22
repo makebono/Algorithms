@@ -13,6 +13,7 @@ import com.makebono.algorithms.pathfinder.astaralgorithm.AStarNode;
  */
 public class GComparator implements Comparator<AStarNode> {
 
+    @Override
     public int compare(final AStarNode n1, final AStarNode n2) {
         if (n1.getGScore() > n2.getGScore()) {
             return 1;

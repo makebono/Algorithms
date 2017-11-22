@@ -1,10 +1,6 @@
 package com.makebono.algorithms.test;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-
-import com.makebono.algorithms.pathfinder.astaralgorithm.AStarNode;
-import com.makebono.algorithms.pathfinder.astaralgorithm.AStarPathFinder;
+import com.makebono.algorithms.hungarianalgorithm.HungarianWorkDistributor;
 
 /** 
  * @ClassName: TestField 
@@ -14,9 +10,11 @@ import com.makebono.algorithms.pathfinder.astaralgorithm.AStarPathFinder;
  *  
  */
 public class TestField {
-    public static void main(final String[] args) throws FileNotFoundException {
-        final AStarPathFinder ASPF = new AStarPathFinder("input.txt");
-        final ArrayList<AStarNode> list = ASPF.findPath(97, 791);
+    public static void main(final String[] args) {
+        final HungarianWorkDistributor hwd = new HungarianWorkDistributor(4);
+
+        hwd.solve();
+
         /*
         final int[][] w = new int[4][4];
         final int[] w1 = { 0, 3, 0, 5 };
