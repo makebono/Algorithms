@@ -355,14 +355,14 @@ public class HungarianWorkDistributor {
         return this.workList;
     }
 
-    public void addWorker(final String name) {
+    private void addWorker(final String name) {
         if (this.workerNum < this.workerCapacity) {
             this.workerList[this.workerNum] = name;
             this.workerNum++;
         }
     }
 
-    public void addWork(final String name) {
+    private void addWork(final String name) {
         if (this.workNum < this.workCapacity) {
             this.workList[this.workNum] = name;
             this.workNum++;
