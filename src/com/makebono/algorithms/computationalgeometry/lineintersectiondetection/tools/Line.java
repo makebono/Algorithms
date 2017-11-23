@@ -2,6 +2,8 @@ package com.makebono.algorithms.computationalgeometry.lineintersectiondetection.
 
 import java.math.BigDecimal;
 
+import com.makebono.algorithms.tools.bigdecimalsqrt.BigDecimalSqrt;
+
 /** 
  * @ClassName: Line 
  * @Description: Line object
@@ -47,8 +49,7 @@ public class Line {
         } else {
             final BigDecimal temp = ((this.x1.subtract(this.x2)).pow(2)).add((this.y1.subtract(this.y2)).pow(2))
                     .setScale(6);
-            final double answer = Math.sqrt(temp.doubleValue());
-            return new BigDecimal(Double.toString(answer)).setScale(6, BigDecimal.ROUND_HALF_UP);
+            return BigDecimalSqrt.sqrt(temp, 6);
         }
     }
 
