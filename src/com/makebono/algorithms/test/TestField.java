@@ -2,7 +2,8 @@ package com.makebono.algorithms.test;
 
 import java.io.FileNotFoundException;
 
-import com.makebono.algorithms.greedyalgorithm.huffmancoding.HuffmanCoding;
+import com.makebono.algorithms.computationalgeometry.lineintersectiondetection.LineIntersection;
+import com.makebono.algorithms.computationalgeometry.lineintersectiondetection.tools.Line;
 
 /** 
  * @ClassName: TestField 
@@ -13,12 +14,9 @@ import com.makebono.algorithms.greedyalgorithm.huffmancoding.HuffmanCoding;
  */
 public class TestField {
     public static void main(final String[] args) throws FileNotFoundException {
-        final HuffmanCoding hc = new HuffmanCoding("huffmaninput.txt");
-        hc.printText();
-        hc.printCodeBook();
-        hc.printDecodeBook();
-        hc.printEncodedText();
-        hc.printDecodedText();
+        final Line l1 = new Line(-3, 1, 1, 5);
+        final Line l2 = new Line(-1, 5, 4, 2);
+        System.out.println(LineIntersection.detect(l2, l1));
 
     }
 }
