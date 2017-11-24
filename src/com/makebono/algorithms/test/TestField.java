@@ -2,7 +2,8 @@ package com.makebono.algorithms.test;
 
 import java.io.FileNotFoundException;
 
-import com.makebono.algorithms.computationalgeometry.lineintersectiondetection.tools.Line;
+import com.makebono.algorithms.networkflow.maximumflow.FordFulkersonMethod;
+import com.makebono.datastructures.graph.Vertex;
 
 /** 
  * @ClassName: TestField 
@@ -13,9 +14,27 @@ import com.makebono.algorithms.computationalgeometry.lineintersectiondetection.t
  */
 public class TestField {
     public static void main(final String[] args) throws FileNotFoundException {
-        final Line l1 = new Line(-3, 1, 1, 5);
-        final Line l2 = new Line(1, 5, 4, 2);
-        System.out.println(l1.length());
+        final Vertex<String> s = new Vertex<String>(0, "Vancouver");
+        final Vertex<String> v1 = new Vertex<String>(1, "Edmonton");
+        final Vertex<String> v2 = new Vertex<String>(2, "Calgary");
+        final Vertex<String> v3 = new Vertex<String>(3, "Saskatoon");
+        final Vertex<String> v4 = new Vertex<String>(4, "Regina");
+        final Vertex<String> t = new Vertex<String>(5, "Edmonton");
 
+        final FordFulkersonMethod ffm = new FordFulkersonMethod();
+        ffm.add(s, v1, 16);
+        ffm.add(s, v2, 13);
+        ffm.add(v1, v3, 12);
+        ffm.add(v2, v1, 4);
+        ffm.add(v3, v2, 9);
+        ffm.add(v2, v4, 14);
+        ffm.add(v4, v3, 7);
+        ffm.add(v3, t, 20);
+        ffm.add(v4, t, 4);
+
+        ffm.setSource(s);
+        ffm.setSink(t);
+
+        ffm.maximumFlow();
     }
 }
