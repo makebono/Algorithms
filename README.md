@@ -1,6 +1,7 @@
 # Algorithms
 Test field for algorithms. Everything algorithmically I suddenly come up with will be implemented and put in here, for fun.
 Currently it includes:
+
     -Computational Geometry:
         .Convex hull wrapping
         .Line intersection detection
@@ -13,6 +14,9 @@ Currently it includes:
     -Greedy algorithm:
         .Greedy coin changer
         .Huffman encoding and decoding
+    
+    -Hungarian algorithm
+        .Work distributor
         
     -Pathfinder
         .A* algorithm based path finder
