@@ -14,12 +14,13 @@ import com.makebono.datastructures.graph.Vertex;
  */
 public class TestField {
     public static void main(final String[] args) throws FileNotFoundException {
+
         final Vertex<String> s = new Vertex<String>(0, "Vancouver");
         final Vertex<String> v1 = new Vertex<String>(1, "Edmonton");
         final Vertex<String> v2 = new Vertex<String>(2, "Calgary");
         final Vertex<String> v3 = new Vertex<String>(3, "Saskatoon");
         final Vertex<String> v4 = new Vertex<String>(4, "Regina");
-        final Vertex<String> t = new Vertex<String>(5, "Edmonton");
+        final Vertex<String> t = new Vertex<String>(5, "Winnipeg");
 
         final FordFulkersonMethod ffm = new FordFulkersonMethod();
         ffm.add(s, v1, 16);
