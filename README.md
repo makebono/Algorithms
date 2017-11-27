@@ -17,6 +17,9 @@ Currently it includes:
     
     -Hungarian algorithm
         .Work distributor
+    
+    -Flow network
+        .Ford-Fulkerson method for maximum flow
         
     -Pathfinder
         .A* algorithm based path finder
