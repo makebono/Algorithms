@@ -1,10 +1,3 @@
-/**   
- * @Title: Imshow.java 
- * @Package com.makebono.algorithms.tools.computervision 
- * @Description: TODO(用一句话描述该文件做什么) 
- * @author tangxj
- * @date 2017年11月27日 上午11:41:54  
- */
 package com.makebono.algorithms.tools.computervision;
 
 import java.awt.Container;
