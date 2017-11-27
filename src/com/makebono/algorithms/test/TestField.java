@@ -1,9 +1,9 @@
 package com.makebono.algorithms.test;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import com.makebono.algorithms.networkflow.maximumflow.FordFulkersonMethod;
-import com.makebono.datastructures.graph.Vertex;
+import com.makebono.algorithms.computervision.colorindexing.TrackingInImage;
+import com.makebono.algorithms.tools.computervision.matrix.ImageMatrix;
 
 /** 
  * @ClassName: TestField 
@@ -13,15 +13,15 @@ import com.makebono.datastructures.graph.Vertex;
  *  
  */
 public class TestField {
-    public static void main(final String[] args) throws FileNotFoundException {
-
+    public static void main(final String[] args) throws IOException {
+        /*
         final Vertex<String> s = new Vertex<String>(0, "Vancouver");
         final Vertex<String> v1 = new Vertex<String>(1, "Edmonton");
         final Vertex<String> v2 = new Vertex<String>(2, "Calgary");
         final Vertex<String> v3 = new Vertex<String>(3, "Saskatoon");
         final Vertex<String> v4 = new Vertex<String>(4, "Regina");
         final Vertex<String> t = new Vertex<String>(5, "Winnipeg");
-
+        
         final FordFulkersonMethod ffm = new FordFulkersonMethod();
         ffm.add(s, v1, 16);
         ffm.add(s, v2, 13);
@@ -32,10 +32,15 @@ public class TestField {
         ffm.add(v4, v3, 7);
         ffm.add(v3, t, 20);
         ffm.add(v4, t, 4);
-
+        
         ffm.setSource(s);
         ffm.setSink(t);
-
+        
         ffm.maximumFlow();
+        */
+        final ImageMatrix desk = new ImageMatrix("desk.jpg");
+        final ImageMatrix mouse = new ImageMatrix("bottle.png");
+        TrackingInImage.backProjection(mouse, desk);
+
     }
 }
