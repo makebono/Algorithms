@@ -81,5 +81,7 @@ public class Tracking {
         g2d.draw(r2d);
         t = System.currentTimeMillis() - t;
         System.out.println("Times cost for drawing on image is: " + t / 1000);
+
+        Display.imshow(target.image(), "Target for track");
     }
 }
