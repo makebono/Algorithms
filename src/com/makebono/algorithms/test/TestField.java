@@ -15,6 +15,7 @@ import com.makebono.algorithms.tools.computervision.matrix.ImageMatrix;
 public class TestField {
     public static void main(final String[] args) throws IOException {
         /*
+        // Maximum network flow
         final Vertex<String> s = new Vertex<String>(0, "Vancouver");
         final Vertex<String> v1 = new Vertex<String>(1, "Edmonton");
         final Vertex<String> v2 = new Vertex<String>(2, "Calgary");
@@ -38,6 +39,7 @@ public class TestField {
         
         ffm.maximumFlow();
         
+        // Convolution
         final int[][] data = new int[3][3];
         final int[] d1 = { 1, 2, 3 };
         final int[] d2 = { 4, 5, 6 };
@@ -63,8 +65,8 @@ public class TestField {
             System.out.println();
         }
         */
-        final ImageMatrix desk = new ImageMatrix("repository.png");
-        final ImageMatrix bottle = new ImageMatrix("img.jpg");
+        final ImageMatrix desk = new ImageMatrix("desk.jpg");
+        final ImageMatrix bottle = new ImageMatrix("bottle2.png");
         Tracking.backProjection(bottle, desk);
 
     }
