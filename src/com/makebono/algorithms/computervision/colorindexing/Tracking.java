@@ -2,7 +2,7 @@
  * Swain and Ballard's color indexing. Generate color histogram for both target and environment image, and use back projection to compute
  * the probabilities of presense of target at each pixel in the environment. Use a convolutional mask with size of target to sum the 
  * probabilities up in a region. Mark the coordinate of highest region sum as the position of target. Some specific notes in each of the 
- * classes: RatioHistogram, Covolution, Kernel, ColorHistogram.
+ * classes: RatioHistogram, Convolution, Kernel, ColorHistogram.
  *  
  * 
  * Performance issue and solution:
