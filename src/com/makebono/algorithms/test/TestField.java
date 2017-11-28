@@ -2,7 +2,7 @@ package com.makebono.algorithms.test;
 
 import java.io.IOException;
 
-import com.makebono.algorithms.computervision.colorindexing.TrackingInImage;
+import com.makebono.algorithms.computervision.colorindexing.Tracking;
 import com.makebono.algorithms.tools.computervision.matrix.ImageMatrix;
 
 /** 
@@ -64,8 +64,8 @@ public class TestField {
         }
         */
         final ImageMatrix desk = new ImageMatrix("desk.jpg");
-        final ImageMatrix mouse = new ImageMatrix("bottle.png");
-        TrackingInImage.backProjection(mouse, desk);
+        final ImageMatrix bottle = new ImageMatrix("bottle.png");
+        Tracking.backProjection(bottle, desk);
 
     }
 }

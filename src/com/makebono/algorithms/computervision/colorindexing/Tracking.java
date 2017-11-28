@@ -11,6 +11,11 @@
  *     The optimized convolution method is separable convolution. Which is frankly to convolve horizontally and vertically, separately.
  *     This needs a separable kernel. Which is all "1"s in both vertical and horizontal in this tracking case.
  *     After optimization, the time takes for the convolution dropped from 70secs to 1sec. Boo! 
+ *     
+ * Instruction:
+ *     final ImageMatrix desk = new ImageMatrix("desk.jpg");
+ *     final ImageMatrix bottle = new ImageMatrix("bottle.png");
+ *     Tracking.backProjection(bottle, desk);
  */
 package com.makebono.algorithms.computervision.colorindexing;
 
@@ -32,7 +37,7 @@ import com.makebono.algorithms.tools.computervision.matrix.Maximum;
  * @date 2017年11月27日 上午10:37:02 
  *  
  */
-public class TrackingInImage {
+public class Tracking {
     public static void backProjection(final ImageMatrix target, final ImageMatrix environment) throws IOException {
         final int[][][] targetMatrix = target.matrix();
         final int[][][] environmentMatrix = environment.matrix();
