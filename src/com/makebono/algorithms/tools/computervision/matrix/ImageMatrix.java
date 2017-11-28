@@ -44,6 +44,7 @@ public class ImageMatrix {
 
     private int[][][] generateMatrix() {
         int cursor = 0;
+        // int[] test = this.image.getRaster().getDataBuffer().getOffsets();
         for (int i = 0; i < this.image.getHeight(); i++) {
             for (int o = 0; o < this.image.getWidth(); o++) {
                 // I prefered the channel ordered as R G B, as in Matlab.
@@ -89,7 +90,6 @@ public class ImageMatrix {
 
     public void set(final int m, final int n, final int c, final int data) {
         this.matrix[m][n][c] = data;
-        this.rebuildImage();
     }
 
     public void imshow() throws IOException {
