@@ -1,15 +1,24 @@
 package com.makebono.algorithms.computervision.colorindexing;
 
 /** 
- * @ClassName: RationalHistogram 
- * @Description: Generate rational histogram by comparing pixels of target and environmen.
+ * @ClassName: RatioHistogram 
+ * @Description: Generate rational histogram by comparing pixels of target and environment. This is histogram of ratio 
+ * on each pixel, representing the probability of target's presence at that pixel. This method called Back-Projection. 
+ * According to Swain and Ballard, the formula of ratio histogram:
+ * 
+ *                                     Ri = min(Mi/Ii,1)
+ * Ri is the probability ratio at pixel i, Mi and Ii are values of color histogram of target(Model) and Image(Environment).
+ * Take minimum value between it and 1 is because probability cannot be more than 1. Because I don't want to mess with
+ * double around its accuracy or BigDecimal around its methods, I use ratio*100 as for here. So it is: 
+ *                                     Ri = min(Mi*100/Ii,100) 
+ * in this implementation.
  * @author makebono
  * @date 2017年11月27日 下午3:42:02 
  *  
  */
-public class RationalHistogram {
-    public static int[][] generate(final int[][][] targetHistogram, final int[][][] environmentHistogram, final int m,
-            final int n, final int[][][] environmentMatrix) {
+public class RatioHistogram {
+    public static int[][] backProject(final int[][][] targetHistogram, final int[][][] environmentHistogram,
+            final int m, final int n, final int[][][] environmentMatrix) {
         final int[][] rationalHistogram = new int[m][n];
 
         for (int i = 0; i < m; i++) {

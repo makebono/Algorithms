@@ -6,7 +6,7 @@ import com.makebono.algorithms.tools.computervision.matrix.ImageMatrix;
 
 /** 
  * @ClassName: Kernel 
- * @Description: A simple kernel with all 1 assigned.
+ * @Description: A simple kernel with all 1 assigned, uses for finding the total probability of existence of the target in a region.
  * @author makebono
  * @date 2017年11月27日 下午4:01:06 
  *  
@@ -22,5 +22,19 @@ public class Kernel {
         }
 
         return kernel;
+    }
+
+    // Vertical separable kernel.
+    public static int[] separateV(final ImageMatrix target) {
+        final int[] v = new int[target.image().getHeight()];
+        Arrays.fill(v, 1);
+        return v;
+    }
+
+    // Horizontal separable kernel.
+    public static int[] separateH(final ImageMatrix target) {
+        final int[] v = new int[target.image().getWidth()];
+        Arrays.fill(v, 1);
+        return v;
     }
 }

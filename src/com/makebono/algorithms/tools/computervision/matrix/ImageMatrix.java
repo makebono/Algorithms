@@ -90,6 +90,7 @@ public class ImageMatrix {
 
     public void set(final int m, final int n, final int c, final int data) {
         this.matrix[m][n][c] = data;
+        // this.rebuildImage();
     }
 
     public void imshow() throws IOException {
