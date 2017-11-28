@@ -59,8 +59,8 @@ public class Tracking {
         final int[] kernelV = Kernel.separateV(target);
 
         t = System.currentTimeMillis();
-        // final int[][] histogramConvolution = Convolution.conv2trivial(rationalHistogram, kernel);
-        final int[][] histogramConvolution = Convolution.conv2f(rationalHistogram, kernelV, kernelH);
+        // final int[][] histogramConvolution = Convolution.conv2trivial(rationalHistogram, kernel, true);
+        final int[][] histogramConvolution = Convolution.conv2f(rationalHistogram, kernelV, kernelH, true);
         t = System.currentTimeMillis() - t;
         System.out.println("Times cost for convolution calculation is: " + t / 1000);
 
