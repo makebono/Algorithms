@@ -13,7 +13,11 @@ public class ColorHistogram {
 
         for (int i = 0; i < input.length; i++) {
             for (int o = 0; o < input[0].length; o++) {
+                // Ignore a certain pixel with value(brightness) in all 3 channel less than 5. In practical case, there
+                // would not likely to be "something black that black". If there is, consider it as noise.
                 if (input[i][o][0] >= 5 || input[i][o][1] >= 5 || input[i][o][2] >= 5) {
+                    // According to Swain and Ballard's method, 8X8X8 channels are capable to guarantee accuracy enough
+                    // high.
                     int r = (int) (input[i][o][0] / 31.875) - 1;
                     int g = (int) (input[i][o][1] / 31.875) - 1;
                     int b = (int) (input[i][o][2] / 31.875) - 1;

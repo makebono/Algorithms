@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  *  
  */
 public class Display {
-    public static void imshow(final BufferedImage newImg, final String title) throws IOException {
+    public static BufferedImage imshow(final BufferedImage newImg, final String title) throws IOException {
         final BufferedImage img = newImg;
         final JFrame window = new JFrame();
 
@@ -29,6 +29,7 @@ public class Display {
         pane.add(panel);
 
         window.setVisible(true);
+        return img;
     }
 }
 
