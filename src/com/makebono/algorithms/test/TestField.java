@@ -64,7 +64,7 @@ public class TestField {
         }
         */
         final ImageMatrix desk = new ImageMatrix("desk.jpg");
-        final ImageMatrix bottle = new ImageMatrix("bottle.png");
+        final ImageMatrix bottle = new ImageMatrix("bottle2.png");
         Tracking.backProjection(bottle, desk);
 
     }
