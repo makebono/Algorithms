@@ -63,8 +63,8 @@ public class TestField {
             System.out.println();
         }
         */
-        final ImageMatrix desk = new ImageMatrix("desk.jpg");
-        final ImageMatrix bottle = new ImageMatrix("bottle2.png");
+        final ImageMatrix desk = new ImageMatrix("repository.png");
+        final ImageMatrix bottle = new ImageMatrix("img.jpg");
         Tracking.backProjection(bottle, desk);
 
     }
