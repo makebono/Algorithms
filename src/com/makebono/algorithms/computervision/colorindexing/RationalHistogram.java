@@ -33,7 +33,7 @@ public class RationalHistogram {
                 final int numberOfEntriesTarget = targetHistogram[r][g][b];
                 final int numberOfEntriesEnvironment = environmentHistogram[r][g][b];
 
-                if (numberOfEntriesTarget >= 20 && numberOfEntriesEnvironment >= 20) {
+                if (numberOfEntriesTarget >= 5 && numberOfEntriesEnvironment >= 5) {
                     final int newEntry = (numberOfEntriesTarget * 100) / (numberOfEntriesEnvironment);
                     if (newEntry >= 100) {
                         rationalHistogram[i][o] = 100;

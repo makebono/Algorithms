@@ -37,6 +37,31 @@ public class TestField {
         ffm.setSink(t);
         
         ffm.maximumFlow();
+        
+        final int[][] data = new int[3][3];
+        final int[] d1 = { 1, 2, 3 };
+        final int[] d2 = { 4, 5, 6 };
+        final int[] d3 = { 7, 8, 9 };
+        data[0] = d1;
+        data[1] = d2;
+        data[2] = d3;
+        
+        final int[][] mask = new int[3][3];
+        final int[] m1 = { 1, 1, 1 };
+        final int[] m2 = { 1, 1, 1 };
+        final int[] m3 = { 1, 1, 1 };
+        mask[0] = m1;
+        mask[1] = m2;
+        mask[2] = m3;
+        
+        final int[][] result = Convolution.conv2trivial(data, mask);
+        
+        for (int i = 0; i < 3; i++) {
+            for (int o = 0; o < 3; o++) {
+                System.out.print(result[i][o] + " ");
+            }
+            System.out.println();
+        }
         */
         final ImageMatrix desk = new ImageMatrix("desk.jpg");
         final ImageMatrix mouse = new ImageMatrix("bottle.png");
