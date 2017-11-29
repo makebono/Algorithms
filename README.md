@@ -16,7 +16,8 @@ Currently it includes:
         .Huffman encoding and decoding
     
     -Computer vision:
-        .Swain&Ballard's Color-Indexing based tracking(For now the accuracy is somewhat acceptable, have plan to optimize it later)
+        .Swain&Ballard's Color-Indexing based tracking(For now the accuracy is somewhat acceptable, 
+            have plan to optimize it later)
     
     -Hungarian algorithm
         .Work distributor
