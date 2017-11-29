@@ -39,18 +39,23 @@ import com.makebono.algorithms.tools.computervision.matrix.Maximum;
  */
 public class Tracking {
     public static void backProjection(final ImageMatrix target, final ImageMatrix environment) throws IOException {
-        final int[][][] targetMatrix = target.matrix();
-        final int[][][] environmentMatrix = environment.matrix();
 
         double t = System.currentTimeMillis();
-        final int[][][] targetHistogram = ColorHistogram.generate(targetMatrix);
-        final int[][][] environmentHistogram = ColorHistogram.generate(environmentMatrix);
+        // final int[][][] targetHistogram = ColorHistogram.generate(target);
+        // final int[][][] environmentHistogram = ColorHistogram.generate(environment);
+
+        final int[] tHistogram1D = ColorHistogram.generate1D(target);
+        final int[] eHistogram1D = ColorHistogram.generate1D(environment);
+
         t = System.currentTimeMillis() - t;
         System.out.println("Times cost for generating color histogram is: " + t / 1000);
 
         t = System.currentTimeMillis();
-        final int[][] rationalHistogram = RatioHistogram.backProject(targetHistogram, environmentHistogram,
-                environmentMatrix.length, environmentMatrix[0].length, environmentMatrix);
+        // final int[][] rationalHistogram = RatioHistogram.backProject(targetHistogram, environmentHistogram,
+        // environment);
+
+        final int[] rHistogram1D = RatioHistogram.backProject1D(tHistogram1D, eHistogram1D, environment);
+
         t = System.currentTimeMillis() - t;
         System.out.println("Times cost for generating rational histogram is: " + t / 1000);
 
@@ -60,12 +65,17 @@ public class Tracking {
 
         t = System.currentTimeMillis();
         // final int[][] histogramConvolution = Convolution.conv2trivial(rationalHistogram, kernel, true);
-        final int[][] histogramConvolution = Convolution.conv2f(rationalHistogram, kernelV, kernelH, true);
+        // final int[][] histogramConvolution = Convolution.conv2f(rationalHistogram, kernelV, kernelH, true);
+        final int[] histogram1DConvolution = Convolution.conv1f(rHistogram1D, kernelV, kernelH,
+                environment.image().getHeight(), environment.image().getWidth());
+
         t = System.currentTimeMillis() - t;
         System.out.println("Times cost for convolution calculation is: " + t / 1000);
 
         t = System.currentTimeMillis();
-        final int[] peak = Maximum.find(histogramConvolution);
+        // final int[] peak = Maximum.find(histogramConvolution);
+        final int[] peak = Maximum.find1D(histogram1DConvolution, environment.image().getHeight(),
+                environment.image().getWidth());
         final int maxM = peak[0];
         final int maxN = peak[1];
         t = System.currentTimeMillis() - t;
