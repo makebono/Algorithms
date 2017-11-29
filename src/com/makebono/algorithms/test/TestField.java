@@ -1,10 +1,8 @@
 package com.makebono.algorithms.test;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 
-import com.makebono.algorithms.computationalgeometry.lineintersectiondetection.LineIntersection;
-import com.makebono.algorithms.computationalgeometry.lineintersectiondetection.tools.Line;
+import com.makebono.algorithms.tools.FastInverseSqrt;
 
 /** 
  * @ClassName: TestField 
@@ -90,8 +88,8 @@ public class TestField {
         // Tower of Hanoi
         final TowerOfHanoi toh = new TowerOfHanoi(7);
         toh.game(7, 1, 3);
-         */
-
+        
+        // Line intersection
         final Line l1 = new Line(-3, 1, 1, 5);
         final Line l2 = new Line(-1, 5, 4, 2);
         System.out.println(LineIntersection.detect(l2, l1));
@@ -99,6 +97,8 @@ public class TestField {
         xy = LineIntersection.intersectAt(l1, l2);
         System.out.println(xy[0]);
         System.out.println(xy[1]);
+         */
 
+        System.out.println(FastInverseSqrt.sqrt(40000));
     }
 }
