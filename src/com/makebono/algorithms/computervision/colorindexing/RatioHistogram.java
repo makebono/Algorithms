@@ -1,5 +1,7 @@
 package com.makebono.algorithms.computervision.colorindexing;
 
+import com.makebono.algorithms.tools.computervision.matrix.ImageMatrix;
+
 /** 
  * @ClassName: RatioHistogram 
  * @Description: Generate rational histogram by comparing pixels of target and environment. This is histogram of ratio 
@@ -18,7 +20,11 @@ package com.makebono.algorithms.computervision.colorindexing;
  */
 public class RatioHistogram {
     public static int[][] backProject(final int[][][] targetHistogram, final int[][][] environmentHistogram,
-            final int m, final int n, final int[][][] environmentMatrix) {
+            final ImageMatrix environment) {
+        final int m = environment.image().getHeight();
+        final int n = environment.image().getWidth();
+        final int[][][] environmentMatrix = environment.matrix();
+
         final int[][] rationalHistogram = new int[m][n];
 
         for (int i = 0; i < m; i++) {
@@ -48,6 +54,48 @@ public class RatioHistogram {
                         rationalHistogram[i][o] = 100;
                     } else {
                         rationalHistogram[i][o] = newEntry;
+                    }
+                }
+            }
+        }
+
+        return rationalHistogram;
+    }
+
+    public static int[] backProject1D(final int[] targetHistogram, final int[] environmentHistogram,
+            final ImageMatrix environment) {
+        final int m = environment.image().getHeight();
+        final int n = environment.image().getWidth();
+
+        final int[] rationalHistogram = new int[m * n];
+
+        for (int i = 0; i < m; i++) {
+            for (int o = 0; o < n; o++) {
+                int r = (int) (environment.get1D(i, o, 0) / 31.875) - 1;
+                int g = (int) (environment.get1D(i, o, 1) / 31.875) - 1;
+                int b = (int) (environment.get1D(i, o, 2) / 31.875) - 1;
+
+                if (r < 0) {
+                    r = 0;
+                }
+
+                if (g < 0) {
+                    g = 0;
+                }
+
+                if (b < 0) {
+                    b = 0;
+                }
+
+                final int numberOfEntriesTarget = targetHistogram[r * 8 * 8 + g * 8 + b];
+                final int numberOfEntriesEnvironment = environmentHistogram[r * 8 * 8 + g * 8 + b];
+
+                if (numberOfEntriesTarget >= 5 || numberOfEntriesEnvironment >= 5) {
+                    final int newEntry = (numberOfEntriesTarget * 100) / (numberOfEntriesEnvironment);
+                    if (newEntry >= 100) {
+                        rationalHistogram[o + i * n] = 100;
+                    } else {
+                        rationalHistogram[o + i * n] = newEntry;
                     }
                 }
             }

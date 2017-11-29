@@ -46,4 +46,41 @@ public class Maximum {
 
         return mn;
     }
+
+    public static int[] find1D(final int[] matrix, final int m, final int n) {
+        int maximum = matrix[0];
+        final int[] mn = new int[2];
+
+        // Find a maximum value first
+        for (int i = 0; i < m; i++) {
+            for (int o = 0; o < n; o++) {
+                if (maximum <= matrix[i * n + o]) {
+                    maximum = matrix[i * n + o];
+                }
+            }
+        }
+
+        int count = 0;
+
+        // As consideration of errors. I also count probability (maximum plus/minus 3) as maximum. So sometimes there
+        // would be multiple maximum, simply average their coordinates for better accuracy.
+        for (int i = 0; i < m; i++) {
+            for (int o = 0; o < n; o++) {
+                if (maximum - matrix[i * n + o] <= 3) {
+                    count++;
+                    mn[0] += i;
+                    mn[1] += o;
+                }
+            }
+        }
+
+        // mn[0] = m, mn[1] = n
+        mn[0] /= count;
+        mn[1] /= count;
+
+        System.out.println("Number of peak(s) found: " + count);
+
+        return mn;
+
+    }
 }
