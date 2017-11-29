@@ -1,6 +1,6 @@
 /** Instruction:
- *     final AStarPathFinder ASPF = new AStarPathFinder("astarinput.txt");
- *     final ArrayList<Node> list = ASPF.findPath(97, 791); 
+ *     final AStarPathFinder ASPF = new AStarPathFinder("inputSet/astarinput.txt");
+ *     final ArrayList<AStarNode> list = ASPF.findPath(97, 791); 
  */
 package com.makebono.algorithms.pathfinder.astaralgorithm;
 

@@ -11,7 +11,7 @@
  * its prefix. So the decoding will be easy to dealt with.
  * 
  * Instruction:
- *     final HuffmanCoding hc = new HuffmanCoding("huffmaninput.txt");
+ *     final HuffmanCoding hc = new HuffmanCoding("inputSet/huffmaninput.txt");
  *     hc.printText();
  *     hc.printCodeBook();
  *     hc.printDecodeBook();

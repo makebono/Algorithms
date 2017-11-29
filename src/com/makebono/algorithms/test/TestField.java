@@ -2,8 +2,7 @@ package com.makebono.algorithms.test;
 
 import java.io.IOException;
 
-import com.makebono.algorithms.computervision.colorindexing.Tracking;
-import com.makebono.algorithms.tools.computervision.matrix.ImageMatrix;
+import com.makebono.algorithms.hungarianalgorithm.HungarianWorkDistributor;
 
 /** 
  * @ClassName: TestField 
@@ -64,10 +63,31 @@ public class TestField {
             }
             System.out.println();
         }
-        */
-        final ImageMatrix environment = new ImageMatrix("desk2.png");
-        final ImageMatrix target = new ImageMatrix("charger.png");
-        Tracking.backProjection(target, environment);
+        
+        // Color-Indexing
+        final ImageMatrix environment = new ImageMatrix("inputSet/desk2.png");
+        final ImageMatrix target = new ImageMatrix("inputSet/charger.png");
+        Tracking.backProjection(target, environment);        
+        
+        // Huffman coding
+        final HuffmanCoding hc = new HuffmanCoding("inputSet/huffmaninput.txt");
+        hc.printText();
+        hc.printCodeBook();
+        hc.printDecodeBook();
+        hc.printEncodedText();
+        hc.printDecodedText();
+        
+        // A* algorithm
+        final AStarPathFinder ASPF = new AStarPathFinder("inputSet/astarinput.txt");
+        final ArrayList<AStarNode> list = ASPF.findPath(97, 791);        
+        
+        // Tower of Hanoi
+        final TowerOfHanoi toh = new TowerOfHanoi(7);
+        toh.game(7, 1, 3);
+         */
+
+        final HungarianWorkDistributor hwd = new HungarianWorkDistributor(4);
+        hwd.solve();
 
     }
 }
