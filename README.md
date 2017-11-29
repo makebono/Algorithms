@@ -39,5 +39,5 @@ Currently it includes:
             ..Quick sort
             ..Selection sort.
            
-And some help classes like comparator, BigDecimal sqrt, etc. And 2 input text for A* and Huffman coding.
-Instruction put in each algorithm class. But later I will write them in the test class.
+And some help classes like comparator, BigDecimal sqrt, etc. 
+Input files for some programs are put in inputSet folder.
