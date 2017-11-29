@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class a_star {
     public static void main(final String[] args) throws FileNotFoundException {
-        final Scanner data = new Scanner(new File("input.txt"));
+        final Scanner data = new Scanner(new File("inputSet/input.txt"));
         Scanner scan;
         String string = new String();
         final ArrayList<node> G = new ArrayList<node>();
@@ -114,6 +114,7 @@ public class a_star {
 
     static class estCompare implements Comparator<node> {
 
+        @Override
         public int compare(final node N1, final node N2) {
             if (N1.getEst() > N2.getEst()) {
                 return 1;
