@@ -1,8 +1,10 @@
 package com.makebono.algorithms.test;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
-import com.makebono.algorithms.hungarianalgorithm.HungarianWorkDistributor;
+import com.makebono.algorithms.computationalgeometry.lineintersectiondetection.LineIntersection;
+import com.makebono.algorithms.computationalgeometry.lineintersectiondetection.tools.Line;
 
 /** 
  * @ClassName: TestField 
@@ -81,13 +83,22 @@ public class TestField {
         final AStarPathFinder ASPF = new AStarPathFinder("inputSet/astarinput.txt");
         final ArrayList<AStarNode> list = ASPF.findPath(97, 791);        
         
+        // Hungarian algorithm
+        final HungarianWorkDistributor hwd = new HungarianWorkDistributor(4);
+        hwd.solve();
+        
         // Tower of Hanoi
         final TowerOfHanoi toh = new TowerOfHanoi(7);
         toh.game(7, 1, 3);
          */
 
-        final HungarianWorkDistributor hwd = new HungarianWorkDistributor(4);
-        hwd.solve();
+        final Line l1 = new Line(-3, 1, 1, 5);
+        final Line l2 = new Line(-1, 5, 4, 2);
+        System.out.println(LineIntersection.detect(l2, l1));
+        BigDecimal[] xy = new BigDecimal[2];
+        xy = LineIntersection.intersectAt(l1, l2);
+        System.out.println(xy[0]);
+        System.out.println(xy[1]);
 
     }
 }

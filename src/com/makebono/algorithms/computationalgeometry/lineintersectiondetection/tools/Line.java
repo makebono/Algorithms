@@ -53,6 +53,14 @@ public class Line {
         }
     }
 
+    public BigDecimal k() {
+        return this.k;
+    }
+
+    public BigDecimal b() {
+        return this.b;
+    }
+
     public BigDecimal YAt(final BigDecimal x) {
         final BigDecimal kx = this.k.multiply(x).setScale(6, BigDecimal.ROUND_HALF_UP);
         final BigDecimal kxb = kx.add(this.b).setScale(6, BigDecimal.ROUND_HALF_UP);

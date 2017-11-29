@@ -89,4 +89,22 @@ public class LineIntersection {
             }
         }
     }
+
+    // Return the coordinate of intersection for two lines.
+    public static BigDecimal[] intersectAt(final Line l1, final Line l2) {
+        final BigDecimal[] xy = new BigDecimal[2];
+        final BigDecimal k1 = l1.k();
+        final BigDecimal b1 = l1.b();
+        final BigDecimal k2 = l2.k();
+        final BigDecimal b2 = l2.b();
+
+        if (detect(l1, l2)) {
+            xy[0] = ((b2.subtract(b1)).divide(k1.subtract(k2))).setScale(6, BigDecimal.ROUND_HALF_UP);
+            xy[1] = ((xy[0].multiply(k1)).add(b1)).setScale(6, BigDecimal.ROUND_HALF_UP);
+            return xy;
+        } else {
+            return null;
+        }
+
+    }
 }
