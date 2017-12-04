@@ -1,8 +1,9 @@
 package com.makebono.algorithms.test;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
-import com.makebono.algorithms.tools.FastInverseSqrt;
+import com.makebono.algorithms.tools.bigdecimalsqrt.BigDecimalSqrt;
 
 /** 
  * @ClassName: TestField 
@@ -99,6 +100,6 @@ public class TestField {
         System.out.println(xy[1]);
          */
 
-        System.out.println(FastInverseSqrt.sqrt(40000));
+        System.out.println(BigDecimalSqrt.sqrt(BigDecimal.valueOf(4), 6));
     }
 }

@@ -2,7 +2,7 @@
  * sqrt(a) is a root of f(x) = x^2 - a = 0. Notice f(x)' is 2x.
  * Set x0 anything positive you like, then we have:
  * 
- *        xn = xn-1 + f(x-1)/f(x-1)' = xn-1 + ((xn-1)^2 - a)/2xn-1 = (xn-1 + a/xn-1)/2 
+ *        xn = xn-1 - f(x-1)/f(x-1)' = xn-1 + ((xn-1)^2 - a)/2xn-1 = (xn-1 + a/xn-1)/2 
  * 
  * Iterate this to get xn as sqrt(a).
  */
