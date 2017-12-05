@@ -66,7 +66,7 @@ public class Maximum {
         // would be multiple maximum, simply average their coordinates for better accuracy.
         for (int i = 0; i < m; i++) {
             for (int o = 0; o < n; o++) {
-                if (maximum - matrix[i * n + o] <= 3) {
+                if (Math.abs(maximum - matrix[i * n + o]) <= 3) {
                     count++;
                     mn[0] += i;
                     mn[1] += o;
