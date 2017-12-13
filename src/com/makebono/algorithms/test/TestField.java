@@ -1,9 +1,9 @@
 package com.makebono.algorithms.test;
 
 import java.io.IOException;
-import java.math.BigDecimal;
+import java.util.Map;
 
-import com.makebono.algorithms.tools.bigdecimalsqrt.BigDecimalSqrt;
+import com.makebono.algorithms.tools.characterstreamrelated.BuildMapFromInput;
 
 /** 
  * @ClassName: TestField 
@@ -100,6 +100,13 @@ public class TestField {
         System.out.println(xy[1]);
          */
 
-        System.out.println(BigDecimalSqrt.sqrt(BigDecimal.valueOf(4), 6));
+        final String a = "abc:123,ddd:333,dwq:155,aaa:612";
+
+        final Map<String, String> aa = BuildMapFromInput.build(a, ',', ':');
+
+        for (final String key : aa.keySet()) {
+            System.out.print(key + ":");
+            System.out.println(aa.get(key));
+        }
     }
 }
