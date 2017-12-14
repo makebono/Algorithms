@@ -34,12 +34,13 @@ public class EightQueens {
         } else {
             for (int m = 0; m < 8; m++) {
                 if (rowClear(entries, m, n) && diagClear(entries, m, n)) {
+                    // Try placing queen at a possibly legit entry.
                     place(entries, m, n);
-
+                    // Try to solve the problem recursively.
                     if (solve(entries, n + 1)) {
                         return true;
                     }
-
+                    // If no solution found, remove the queen previously placed.
                     remove(entries, m, n);
                 }
             }
@@ -71,35 +72,9 @@ public class EightQueens {
     }
 
     private static boolean diagClear(final int[] board, final int m, final int n) {
-        int ulm, urm;
-        if (m > 0) {
-            ulm = m - 1;
-            urm = m - 1;
+        int ulm = m, urm = m, llm = m, lrm = m;
+        int uln = n, lln = n, urn = n, lrn = n;
 
-        } else {
-            ulm = m;
-            urm = m;
-        }
-
-        int llm, lrm;
-        if (m < 7) {
-            lrm = m + 1;
-            llm = m + 1;
-        } else {
-            lrm = m;
-            llm = m;
-        }
-
-        int uln, lln;
-        if (n > 0) {
-            uln = n - 1;
-            lln = n - 1;
-        } else {
-            uln = n;
-            lln = n;
-        }
-
-        int urn, lrn;
         if (n < 7) {
             urn = n + 1;
             lrn = n + 1;
@@ -110,19 +85,6 @@ public class EightQueens {
 
         int count = 0;
         while (count < 7) {
-            if (board[EightQueens.to1D(ulm, uln)] == 1 && ulm != m && uln != n) {
-                return false;
-            }
-            if (board[EightQueens.to1D(urm, urn)] == 1 && urm != m && urn != n) {
-                return false;
-            }
-            if (board[EightQueens.to1D(llm, lln)] == 1 && llm != m && lln != n) {
-                return false;
-            }
-            if (board[EightQueens.to1D(lrm, lrn)] == 1 && lrm != m && lrn != n) {
-                return false;
-            }
-
             // Be careful about the assignments.
             if (ulm > 0) {
                 if (uln > 0) {
@@ -152,12 +114,26 @@ public class EightQueens {
                 }
             }
 
+            if (board[EightQueens.to1D(ulm, uln)] == 1 && ulm != m && uln != n) {
+                return false;
+            }
+            if (board[EightQueens.to1D(urm, urn)] == 1 && urm != m && urn != n) {
+                return false;
+            }
+            if (board[EightQueens.to1D(llm, lln)] == 1 && llm != m && lln != n) {
+                return false;
+            }
+            if (board[EightQueens.to1D(lrm, lrn)] == 1 && lrm != m && lrn != n) {
+                return false;
+            }
+
             count++;
         }
 
         return true;
     }
 
+    // Convert 2D input into iD index.
     public static int to1D(final int m, final int n) {
         return m * 8 + n;
     }
