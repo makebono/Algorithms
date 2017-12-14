@@ -1,8 +1,9 @@
 package com.makebono.algorithms.test;
 
 import java.io.IOException;
+import java.util.HashMap;
 
-import com.makebono.algorithms.backtracking.EightQueens;
+import com.makebono.algorithms.string.patternmatching.algorithmedebono.Algorithme_de_Bono;
 
 /** 
  * @ClassName: TestField 
@@ -98,7 +99,15 @@ public class TestField {
         System.out.println(xy[0]);
         System.out.println(xy[1]);
          */
-        EightQueens.solve();
+
+        final Algorithme_de_Bono adb = new Algorithme_de_Bono("inputSet/output.txt");
+
+        final String[] input = { "西安办事处", "郑州办事处", "江苏办事处", "山东办事处", "云南办事处", "宁夏办事处", "广州办事处" };
+        final HashMap<String, String> result = adb.paragraph(input);
+
+        for (final String str : input) {
+            System.out.println(result.get(str));
+        }
 
     }
 }
