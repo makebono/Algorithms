@@ -1,9 +1,8 @@
 package com.makebono.algorithms.test;
 
 import java.io.IOException;
-import java.util.Map;
 
-import com.makebono.algorithms.tools.characterstreamrelated.BuildMapFromInput;
+import com.makebono.algorithms.backtracking.EightQueens;
 
 /** 
  * @ClassName: TestField 
@@ -99,14 +98,7 @@ public class TestField {
         System.out.println(xy[0]);
         System.out.println(xy[1]);
          */
+        EightQueens.solve();
 
-        final String a = "abc:123,ddd:333,dwq:155,aaa:612";
-
-        final Map<String, String> aa = BuildMapFromInput.build(a, ',', ':');
-
-        for (final String key : aa.keySet()) {
-            System.out.print(key + ":");
-            System.out.println(aa.get(key));
-        }
     }
 }
