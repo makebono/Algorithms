@@ -101,24 +101,5 @@ public class TestField {
         System.out.println(xy[1]);
          */
 
-        final Matching adb = new ForceComparison("inputSet/output.txt");
-
-        final String[] input = { "西安办事处", "郑州办事处", "江苏办事处", "山东办事处", "云南办事处", "宁夏办事处", "广州办事处" };
-        double a = System.currentTimeMillis();
-
-        for (int i = 0; i < 50000; i++) {
-            final HashMap<String, String> result = adb.paragraph(input);
-        }
-        a = System.currentTimeMillis() - a;
-
-        a = System.currentTimeMillis() - a;
-        System.out.println(a / 1000);
-
-        a = System.currentTimeMillis();
-        for (int i = 0; i < 50000; i++) {
-            final HashMap<String, String> result = adb.paragraphByBuildInMethod(input);
-        }
-        a = System.currentTimeMillis() - a;
-        System.out.println(a / 1000);
     }
 }
