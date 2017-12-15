@@ -26,4 +26,27 @@ public abstract class Matching {
     }
 
     public abstract HashMap<String, String> paragraph(final String... labels);
+
+    public HashMap<String, String> paragraphByBuildInMethod(final String... labels) {
+        final HashMap<String, String> result = new HashMap<String, String>();
+        final int[] index = new int[labels.length];
+        int i = 0;
+
+        while (i < labels.length) {
+            index[i] = this.text.indexOf(labels[i]);
+
+            // System.out.println(index);
+            if (i == 0) {
+                i++;
+                continue;
+            } else {
+                result.put(labels[i - 1], this.text.substring(index[i - 1] + labels[i - 1].length(), index[i]));
+            }
+            i++;
+
+        }
+        result.put(labels[i - 1], this.text.substring(index[i - 1] + labels[i - 1].length()));
+
+        return result;
+    }
 }
