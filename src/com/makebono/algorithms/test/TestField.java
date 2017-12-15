@@ -3,7 +3,7 @@ package com.makebono.algorithms.test;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.makebono.algorithms.string.patternmatching.algorithmedebono.Algorithme_de_Bono;
+import com.makebono.algorithms.string.patternmatching.forcecomparison.ForceComparison;
 
 /** 
  * @ClassName: TestField 
@@ -100,10 +100,14 @@ public class TestField {
         System.out.println(xy[1]);
          */
 
-        final Algorithme_de_Bono adb = new Algorithme_de_Bono("inputSet/output.txt");
+        double a = System.currentTimeMillis();
+        final ForceComparison adb = new ForceComparison("inputSet/output.txt");
 
         final String[] input = { "西安办事处", "郑州办事处", "江苏办事处", "山东办事处", "云南办事处", "宁夏办事处", "广州办事处" };
         final HashMap<String, String> result = adb.paragraph(input);
+
+        a = System.currentTimeMillis() - a;
+        System.out.println(a / 1000);
 
         for (final String str : input) {
             System.out.println(result.get(str));

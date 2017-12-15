@@ -41,7 +41,7 @@ public class HuffmanCoding {
     private final HuffmanBonoTree huffmanTree;
     private StringBuilder text;
     private final StringBuilder encodedText;
-    private StringBuilder decodedText;
+    private final StringBuilder decodedText;
     private final HashMap<Character, String> codeBook;
     private final HashMap<String, Character> decodeBook;
 
@@ -53,8 +53,8 @@ public class HuffmanCoding {
         this.codeBook = new HashMap<Character, String>();
         this.decodeBook = new HashMap<String, Character>();
         this.assignCode(location);
-        this.encode(this.text);
-        this.decodedText = this.decode(this.encodedText);
+        this.encode();
+        this.decode();
     }
 
     private ArrayList<HTNode> buildTree(final String location) throws FileNotFoundException {
@@ -128,8 +128,8 @@ public class HuffmanCoding {
         }
     }
 
-    public String encode(final StringBuilder sb) {
-        final Scanner sc = new Scanner(sb.toString());
+    private void encode() {
+        final Scanner sc = new Scanner(this.text.toString());
 
         while (sc.hasNext()) {
             final String cursor = sc.nextLine();
@@ -140,12 +140,10 @@ public class HuffmanCoding {
             this.encodedText.append("\n");
         }
         sc.close();
-        return this.encodedText.toString();
     }
 
-    public StringBuilder decode(final StringBuilder sbi) {
-        final StringBuilder sb = new StringBuilder();
-        final Scanner sc = new Scanner(sbi.toString());
+    private void decode() {
+        final Scanner sc = new Scanner(this.encodedText.toString());
         while (sc.hasNext()) {
             final String cursor = sc.nextLine();
             final StringBuilder subString = new StringBuilder();
@@ -153,14 +151,13 @@ public class HuffmanCoding {
             for (int i = 0; i < cursor.length(); i++) {
                 subString.append(cursor.charAt(i));
                 if (this.decodeBook.get(subString.toString()) != null) {
-                    sb.append(this.decodeBook.get(subString.toString()));
+                    this.decodedText.append(this.decodeBook.get(subString.toString()));
                     subString.delete(0, subString.length() + 1);
                 }
             }
             this.decodedText.append("\n");
         }
         sc.close();
-        return sb;
     }
 
     public void printText() {
@@ -223,13 +220,5 @@ public class HuffmanCoding {
 
     public HashMap<String, Character> getDecodeBook() {
         return this.decodeBook;
-    }
-
-    public String getEncoded() {
-        return this.encodedText.toString();
-    }
-
-    public String getDecoded() {
-        return this.decodedText.toString();
     }
 }
