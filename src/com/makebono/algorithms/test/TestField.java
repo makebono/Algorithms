@@ -101,7 +101,6 @@ public class TestField {
         System.out.println(xy[0]);
         System.out.println(xy[1]);
          */
-
         final Matching kmpm = new KMPMatching("inputSet/output.txt");
         final Matching fc = new ForceComparison("inputSet/output.txt");
 

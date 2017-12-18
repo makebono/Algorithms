@@ -15,8 +15,15 @@ Currently it includes:
         .Greedy coin changer
         .Huffman encoding and decoding
     
+    -Computer vision:
+        .Swain&Ballard's Color-Indexing based tracking(For now the accuracy is somewhat acceptable, 
+            have plan to optimize it later)
+    
     -Hungarian algorithm
         .Work distributor
+    
+    -Flow network
+        .Ford-Fulkerson method for maximum flow
         
     -Pathfinder
         .A* algorithm based path finder
@@ -32,5 +39,5 @@ Currently it includes:
             ..Quick sort
             ..Selection sort.
            
-And some help classes like comparator, BigDecimal sqrt, etc. And 2 input text for A* and Huffman coding.
-Instruction put in each algorithm class. But later I will write them in the test class.
+And some help classes like comparator, BigDecimal sqrt, etc. 
+Input files for some programs are put in inputSet folder.
