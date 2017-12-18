@@ -34,6 +34,7 @@ public abstract class Matching {
 
         while (i < labels.length) {
             index[i] = this.text.indexOf(labels[i]);
+            // System.out.println(index[i]);
 
             // System.out.println(index);
             if (i == 0) {
@@ -49,4 +50,5 @@ public abstract class Matching {
 
         return result;
     }
+
 }
