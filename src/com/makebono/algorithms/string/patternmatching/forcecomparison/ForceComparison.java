@@ -41,6 +41,8 @@ public class ForceComparison extends Matching {
                         i++;
                         sb.setLength(0);
                     } else if (i == labels.length - 1) {
+                        result.put(labels[i - 1], sb.toString());
+                        sb.setLength(0);
                         lastLabel = n + labels[i].length();
                     } else {
                         result.put(labels[i - 1], sb.toString());
