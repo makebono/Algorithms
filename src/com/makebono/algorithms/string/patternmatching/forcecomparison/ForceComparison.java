@@ -93,6 +93,7 @@ public class ForceComparison extends Matching {
             } else {
                 q = 0;
                 magicalSwitch = false;
+                i--;
             }
 
             // Find ya

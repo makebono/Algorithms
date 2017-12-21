@@ -71,17 +71,17 @@ public class KMPMatching extends Matching {
         final int n = this.ttext.length;
         final int m = input.length;
 
-        int q = 0;
-        for (int i = start; i < n; i++) {
-            while (q > 0 && input[q] != this.ttext[i]) {
+        int q = -1;
+        for (int i = 0; i < n; i++) {
+            while (q > 0 && input[q + 1] != this.ttext[i]) {
                 q = piTable[q];
             }
 
-            if (input[q] == this.ttext[i]) {
+            if (input[q + 1] == this.ttext[i]) {
                 q = q + 1;
             }
 
-            if (q == m) {
+            if (q == m - 1) {
                 return i - m + 1;
             }
         }

@@ -1,7 +1,6 @@
 package com.makebono.algorithms.test;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import com.makebono.algorithms.string.patternmatching.forcecomparison.ForceComparison;
 import com.makebono.algorithms.string.patternmatching.knuth_morris_pratt.KMPMatching;
@@ -110,40 +109,35 @@ public class TestField {
             System.out.println(result.get(key));
         }
         */
-        final ForceComparison fc = new ForceComparison("inputSet/output.txt");
-        final KMPMatching kmpm = new KMPMatching("inputSet/output.txt");
-        final String[] input = { "西安办事处", "郑州办事处", "江苏办事处", "山东办事处", "云南办事处", "宁夏办事处", "广州办事处" };
-        fc.init(input);
-        kmpm.init(input);
-        HashMap<String, String> result;
+        final KMPMatching kmpm = new KMPMatching("inputSet/kmpHomeCourt.txt");
+        final ForceComparison fc = new ForceComparison("inputSet/kmpHomeCourt.txt");
+        final char[] input = "ababaca".toCharArray();
+        kmpm.init("ababaca");
+        fc.init("ababaca");
+        final int[] pi = KMPMatching.computePrefix("ababaca");
+
+        int result = 0;
 
         double t = System.currentTimeMillis();
-
-        for (long i = 0; i < 10000000; i++) {
-            result = fc.paragraphByBuildInMethod(input);
+        for (int i = 0; i < 1000000; i++) {
+            result = kmpm.matchByBuildInMethod("ababaca");
         }
-
         t = System.currentTimeMillis() - t;
         System.out.println("Matching by build-in method takes: " + t / 1000 + "s");
 
         t = System.currentTimeMillis();
-
-        for (long i = 0; i < 10000000; i++) {
-            result = kmpm.paragraph(input);
+        for (int i = 0; i < 1000000; i++) {
+            result = kmpm.match(input, pi);
         }
-
-        t = System.currentTimeMillis() - t;
-        System.out.println("Matching by KMP algorithm takes: " + t / 1000 + "s");
-
-        t = System.currentTimeMillis();
-
-        for (long i = 0; i < 10000000; i++) {
-            result = fc.paragraph(input);
-        }
-
         t = System.currentTimeMillis() - t;
         System.out.println("Matching by optimized force matching takes: " + t / 1000 + "s");
 
+        t = System.currentTimeMillis();
+        for (int i = 0; i < 1000000; i++) {
+            result = kmpm.match(input, pi);
+        }
+        t = System.currentTimeMillis() - t;
+        System.out.println("Matching by KMP algorithm takes: " + t / 1000 + "s");
     }
 
 }
