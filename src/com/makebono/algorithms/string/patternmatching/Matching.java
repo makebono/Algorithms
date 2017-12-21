@@ -14,6 +14,9 @@ import java.util.Scanner;
  */
 public abstract class Matching {
     protected final StringBuilder text;
+    protected char[] ttext;
+    protected char[] ttarget;
+    protected char[][] ttargets;
 
     public Matching(final String location) throws FileNotFoundException {
         this.text = new StringBuilder();
@@ -29,26 +32,30 @@ public abstract class Matching {
 
     public HashMap<String, String> paragraphByBuildInMethod(final String... labels) {
         final HashMap<String, String> result = new HashMap<String, String>();
-        final int[] index = new int[labels.length];
+        final int m = labels.length;
+        final int[] index = new int[m];
         int i = 0;
-
-        while (i < labels.length) {
-            index[i] = this.text.indexOf(labels[i]);
+        int startFrom = 0;
+        while (i < m) {
+            index[i] = this.text.indexOf(labels[i], startFrom);
+            startFrom = index[i];
             // System.out.println(index[i]);
 
             // System.out.println(index);
-            if (i == 0) {
-                i++;
+            if (i++ == 0) {
                 continue;
             } else {
-                result.put(labels[i - 1], this.text.substring(index[i - 1] + labels[i - 1].length(), index[i]));
+                result.put(labels[i - 2], this.text.substring(index[i - 2] + labels[i - 2].length(), index[i - 1]));
             }
-            i++;
 
         }
         result.put(labels[i - 1], this.text.substring(index[i - 1] + labels[i - 1].length()));
 
         return result;
+    }
+
+    public int matchByBuildInMethod(final String target) {
+        return this.text.indexOf(target);
     }
 
 }

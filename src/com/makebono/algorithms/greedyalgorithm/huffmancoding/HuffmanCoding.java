@@ -221,4 +221,12 @@ public class HuffmanCoding {
     public HashMap<String, Character> getDecodeBook() {
         return this.decodeBook;
     }
+
+    public StringBuilder getEncoded() {
+        return this.encodedText;
+    }
+
+    public StringBuilder getDecoded() {
+        return this.decodedText;
+    }
 }
