@@ -30,76 +30,87 @@ import com.makebono.algorithms.string.patternmatching.Matching;
  *  
  */
 public class KMPMatching extends Matching {
+    private int[] piTable;
+    private int[][] piTables;
+
     public KMPMatching(final String location) throws FileNotFoundException {
         super(location);
     }
 
     @Override
     public HashMap<String, String> paragraph(final String... labels) {
-        final int[][] piTable = new int[labels.length][];
         final HashMap<String, String> result = new HashMap<String, String>();
-        final int[] index = new int[labels.length];
-        index[0] = 0;
-
-        // Index for current label
+        final int m = labels.length;
+        final int[] index = new int[m];
         int i = 0;
+        int startFrom = 0;
+        while (i < m) {
+            index[i] = this.match(this.ttargets[i], startFrom, this.piTables[i]);
+            startFrom = index[i];
+            // System.out.println(index[i]);
 
-        // Index for text
-        int t = 0;
-
-        // Index for Pi table
-        int k = 0;
-        boolean found = false;
-
-        for (int n = 0; n < labels.length; n++) {
-            piTable[n] = KMPMatching.computePrefix(labels[n]);
-        }
-
-        while (i < labels.length) {
-            if (found) {
-                k = 0;
-                found = false;
-            }
-
-            while (labels[i].charAt(0) != this.text.charAt(t)) {
-                t++;
-            }
-
-            while (!found) {
-                while ((k > 0) && (labels[i].charAt(k) != this.text.charAt(t))) {
-                    k = piTable[i][k - 1];
-                }
-
-                if (labels[i].charAt(k) == this.text.charAt(t)) {
-                    // System.out.println("boo! " + k);
-                    k++;
-                }
-
-                if (k == labels[i].length() - 1) {
-                    found = true;
-                    index[i] = t - labels[i].length() + 1;
-
-                    if (i == 0) {
-                        i++;
-                    } else {
-                        result.put(labels[i - 1],
-                                this.text.substring(index[i - 1] + labels[i - 1].length() + 1, index[i] + 1));
-                        i++;
-                    }
-                }
-                t++;
+            // System.out.println(index);
+            if (i++ == 0) {
+                continue;
+            } else {
+                result.put(labels[i - 2],
+                        this.text.substring(index[i - 2] + this.ttargets[i - 2].length, index[i - 1]));
             }
 
         }
-        result.put(labels[labels.length - 1],
-                this.text.substring((index[index.length - 1] + labels[labels.length - 1].length()) + 1));
+        result.put(labels[i - 1], this.text.substring(index[i - 1] + this.ttargets[i - 1].length));
+
         return result;
+    }
+
+    public int match(final char[] input, final int[] piTable) {
+        return this.match(input, 0, piTable);
+    }
+
+    public int match(final char[] input, final int start, final int[] piTable) {
+        final int n = this.ttext.length;
+        final int m = input.length;
+
+        int q = 0;
+        for (int i = start; i < n; i++) {
+            while (q > 0 && input[q] != this.ttext[i]) {
+                q = piTable[q];
+            }
+
+            if (input[q] == this.ttext[i]) {
+                q = q + 1;
+            }
+
+            if (q == m) {
+                return i - m + 1;
+            }
+        }
+
+        return -1;
+    }
+
+    public void init(final String target) {
+        this.ttext = this.text.toString().toCharArray();
+        this.ttarget = target.toCharArray();
+        this.piTable = computePrefix(target);
+    }
+
+    public void init(final String... targets) {
+        this.ttext = this.text.toString().toCharArray();
+        this.ttargets = new char[targets.length][];
+        this.piTables = new int[targets.length][];
+        int i = 0;
+        for (final String target : targets) {
+            this.piTables[i] = computePrefix(target);
+            this.ttargets[i++] = target.toCharArray();
+        }
     }
 
     // Calculate prefix function of sub pattern p(k): p(1...k...label.length), p[k] = n means the longest proper prefix
     // to be the longest proper suffix of p[k] is p[n].
     // Example shows in header notes of this class above.
     public static int[] computePrefix(final String label) {
+        // System.out.println("boo!");
         final int[] pi = new int[label.length()];
         pi[0] = 0;
         int k = 0;

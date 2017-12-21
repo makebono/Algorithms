@@ -27,39 +27,82 @@ public class ForceComparison extends Matching {
 
     }
 
+    public void init(final String target) {
+        this.ttext = this.text.toString().toCharArray();
+        this.ttarget = target.toCharArray();
+    }
+
+    public void init(final String... targets) {
+        this.ttext = this.text.toString().toCharArray();
+        this.ttargets = new char[targets.length][];
+        int i = 0;
+        for (final String target : targets) {
+            this.ttargets[i++] = target.toCharArray();
+        }
+    }
+
     @Override
     public HashMap<String, String> paragraph(final String... labels) {
         final HashMap<String, String> result = new HashMap<String, String>();
-        final StringBuilder sb = new StringBuilder();
+        final int m = labels.length;
+        final int[] index = new int[m];
         int i = 0;
-        int lastLabel = 0;
+        int startFrom = 0;
+        while (i < m) {
+            index[i] = this.match(this.ttargets[i], startFrom);
+            startFrom = index[i];
+            // System.out.println(index[i]);
 
-        for (int n = 0; n < this.text.length(); n++) {
-            if (labels[i].charAt(0) == this.text.charAt(n)) {
-                if (labels[i].substring(1).equals(this.text.substring(n + 1, n + labels[i].length()))) {
-                    if (i == 0) {
-                        i++;
-                        sb.setLength(0);
-                    } else if (i == labels.length - 1) {
-                        result.put(labels[i - 1], sb.toString());
-                        sb.setLength(0);
-                        lastLabel = n + labels[i].length();
-                    } else {
-                        result.put(labels[i - 1], sb.toString());
-                        sb.setLength(0);
-                        i++;
-                    }
-                } else {
-                    sb.append(this.text.charAt(n));
-                }
+            // System.out.println(index);
+            if (i++ == 0) {
+                continue;
             } else {
-                sb.append(this.text.charAt(n));
+                result.put(labels[i - 2],
+                        this.text.substring(index[i - 2] + this.ttargets[i - 2].length, index[i - 1]));
             }
+
         }
-        sb.setLength(0);
-        sb.append(this.text.substring(lastLabel));
-        result.put(labels[labels.length - 1], sb.toString());
+        result.put(labels[i - 1], this.text.substring(index[i - 1] + this.ttargets[i - 1].length));
+
         return result;
+    }
+
+    public int match(final char[] input) {
+        return this.match(input, 0);
+    }
+
+    public int match(final char[] input, final int start) {
+        final int n = this.ttext.length;
+        final int m = input.length;
+        boolean found = false;
+        int q = 0;
+        int i = start;
+        boolean magicalSwitch = false;
+        while (!found && i < n - m) {
+            if (!magicalSwitch) {
+                if (input[0] != this.ttext[i]) {
+                    while (++i < n - m && input[0] != this.ttext[i]);
+                }
+                magicalSwitch = true;
+            }
+
+            // Next character matches
+            if (input[q++] == this.ttext[i]) {
+                // System.out.println(i);
+                // q++;
+            } else {
+                q = 0;
+                magicalSwitch = false;
+            }
+
+            // Find ya
+            if (q == m) {
+                found = true;
+                return i - m + 1;
+            }
+            i++;
+        }
+        return -1;
     }
 
 }
