@@ -100,30 +100,7 @@ public class TestField {
         System.out.println(xy[0]);
         System.out.println(xy[1]);
          */
-        /*
-        final KMPMatching kmpm = new KMPMatching("inputSet/naganami.txt");
-        kmpm.init("turbines");
-        int index = 0;
-        
-        double t = System.currentTimeMillis();
-        
-        for (long i = 0; i < 10000000; i++) {
-            index = kmpm.matchByBuildInMethod("turbines");
-        }
-        t = System.currentTimeMillis() - t;
-        System.out.println(index);
-        System.out.println(t / 1000 + "s");
-        
-        t = System.currentTimeMillis();
-        
-        for (long i = 0; i < 10000000; i++) {
-            index = kmpm.match("turbines");
-        }
-        t = System.currentTimeMillis() - t;
-        System.out.println(index);
-        System.out.println(t / 1000 + "s");
-        
-        final KMPMatching kmpm = new KMPMatching("inputSet/output.txt");
+
         final String[] input = { "西安办事处", "郑州办事处", "江苏办事处", "山东办事处", "云南办事处", "宁夏办事处", "广州办事处" };
         kmpm.init(input);
         final HashMap<String, String> result = kmpm.paragraph(input);
