@@ -30,7 +30,6 @@ import com.makebono.algorithms.string.patternmatching.Matching;
  *  
  */
 public class KMPMatching extends Matching {
-    private int[] piTable;
     private int[][] piTables;
 
     public KMPMatching(final String location) throws FileNotFoundException {
@@ -67,12 +66,13 @@ public class KMPMatching extends Matching {
         return this.match(input, 0, piTable);
     }
 
+    // Search for single target
     public int match(final char[] input, final int start, final int[] piTable) {
         final int n = this.ttext.length;
         final int m = input.length;
 
         int q = -1;
-        for (int i = 0; i < n; i++) {
+        for (int i = start; i < n; i++) {
             while (q > 0 && input[q + 1] != this.ttext[i]) {
                 q = piTable[q];
             }
@@ -92,7 +92,6 @@ public class KMPMatching extends Matching {
     public void init(final String target) {
         this.ttext = this.text.toString().toCharArray();
         this.ttarget = target.toCharArray();
-        this.piTable = computePrefix(target);
     }
 
     public void init(final String... targets) {
