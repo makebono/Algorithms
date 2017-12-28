@@ -100,9 +100,7 @@ public class TestField {
         System.out.println(xy[0]);
         System.out.println(xy[1]);
          */
-        /*
-        
-        // String matching performance benchmark
+
         final KMPMatching kmpm = new KMPMatching("inputSet/kmpHomeCourt.txt");
         final ForceComparison fc = new ForceComparison("inputSet/kmpHomeCourt.txt");
         final char[] input = "ababaca".toCharArray();
