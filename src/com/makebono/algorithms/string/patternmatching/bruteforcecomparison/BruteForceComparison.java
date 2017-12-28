@@ -7,7 +7,7 @@
  * 
  * Notice this is slower than using build-in method String.indexOf().
  */
-package com.makebono.algorithms.string.patternmatching.forcecomparison;
+package com.makebono.algorithms.string.patternmatching.bruteforcecomparison;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -15,14 +15,14 @@ import java.util.HashMap;
 import com.makebono.algorithms.string.patternmatching.Matching;
 
 /** 
- * @ClassName: ForceComparison 
- * @Description: ForceComparison. Paragraphing the text according to input labels.
+ * @ClassName: BruteForceComparison 
+ * @Description: BruteForceComparison. Paragraphing the text according to input labels.
  * @author makebono
  * @date 2017年12月14日 下午2:04:28 
  *  
  */
-public class ForceComparison extends Matching {
-    public ForceComparison(final String location) throws FileNotFoundException {
+public class BruteForceComparison extends Matching {
+    public BruteForceComparison(final String location) throws FileNotFoundException {
         super(location);
 
     }
@@ -79,6 +79,7 @@ public class ForceComparison extends Matching {
         int i = start;
         boolean magicalSwitch = false;
         while (!found && i < n - m) {
+            // Fail to matched in last iteration. Looking next match on first character.
             if (!magicalSwitch) {
                 if (input[0] != this.ttext[i]) {
                     while (++i < n - m && input[0] != this.ttext[i]);
@@ -90,7 +91,9 @@ public class ForceComparison extends Matching {
             if (input[q++] == this.ttext[i]) {
                 // System.out.println(i);
                 // q++;
-            } else {
+            }
+            // Next character does not match
+            else {
                 q = 0;
                 magicalSwitch = false;
                 i--;

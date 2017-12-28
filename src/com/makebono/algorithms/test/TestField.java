@@ -2,8 +2,8 @@ package com.makebono.algorithms.test;
 
 import java.io.IOException;
 
-import com.makebono.algorithms.string.patternmatching.forcecomparison.ForceComparison;
-import com.makebono.algorithms.string.patternmatching.knuth_morris_pratt.KMPMatching;
+import com.makebono.algorithms.computationalgeometry.closestpointpair.ClosestPair;
+import com.makebono.datastructures.graph.Vertex;
 
 /** 
  * @ClassName: TestField 
@@ -12,6 +12,7 @@ import com.makebono.algorithms.string.patternmatching.knuth_morris_pratt.KMPMatc
  * @date 2017年11月16日 上午9:50:03 
  *  
  */
+@SuppressWarnings("unchecked")
 public class TestField {
     public static void main(final String[] args) throws IOException {
         /*
@@ -100,67 +101,77 @@ public class TestField {
         System.out.println(xy[1]);
          */
         /*
-        final KMPMatching kmpm = new KMPMatching("inputSet/naganami.txt");
-        kmpm.init("turbines");
-        int index = 0;
         
-        double t = System.currentTimeMillis();
-        
-        for (long i = 0; i < 10000000; i++) {
-            index = kmpm.matchByBuildInMethod("turbines");
-        }
-        t = System.currentTimeMillis() - t;
-        System.out.println(index);
-        System.out.println(t / 1000 + "s");
-        
-        t = System.currentTimeMillis();
-        
-        for (long i = 0; i < 10000000; i++) {
-            index = kmpm.match("turbines");
-        }
-        t = System.currentTimeMillis() - t;
-        System.out.println(index);
-        System.out.println(t / 1000 + "s");
-        
-        final KMPMatching kmpm = new KMPMatching("inputSet/output.txt");
-        final String[] input = { "西安办事处", "郑州办事处", "江苏办事处", "山东办事处", "云南办事处", "宁夏办事处", "广州办事处" };
-        kmpm.init(input);
-        final HashMap<String, String> result = kmpm.paragraph(input);
-        
-        for (final String key : result.keySet()) {
-            System.out.println(key);
-            System.out.println(result.get(key));
-        }
-        */
+        // String matching performance benchmark
         final KMPMatching kmpm = new KMPMatching("inputSet/kmpHomeCourt.txt");
         final ForceComparison fc = new ForceComparison("inputSet/kmpHomeCourt.txt");
         final char[] input = "ababaca".toCharArray();
         kmpm.init("ababaca");
         fc.init("ababaca");
         final int[] pi = KMPMatching.computePrefix("ababaca");
-
+        
         int result = 0;
-
+        
         double t = System.currentTimeMillis();
         for (int i = 0; i < 1000000; i++) {
             result = kmpm.matchByBuildInMethod("ababaca");
         }
         t = System.currentTimeMillis() - t;
         System.out.println("Matching by build-in method takes: " + t / 1000 + "s");
-
+        System.out.println("Target's index is: " + result);
+        
         t = System.currentTimeMillis();
         for (int i = 0; i < 1000000; i++) {
-            result = kmpm.match(input, pi);
+            result = fc.match(input);
         }
         t = System.currentTimeMillis() - t;
         System.out.println("Matching by optimized force matching takes: " + t / 1000 + "s");
-
+        System.out.println("Target's index is: " + result);
+        
         t = System.currentTimeMillis();
         for (int i = 0; i < 1000000; i++) {
             result = kmpm.match(input, pi);
         }
         t = System.currentTimeMillis() - t;
         System.out.println("Matching by KMP algorithm takes: " + t / 1000 + "s");
+        System.out.println("Target's index is: " + result);
+        
+        // KMPMatching paragraphing
+        final KMPMatching kmpm = new KMPMatching("inputSet/output.txt");
+        final String[] input = { "西安办事处", "郑州办事处", "江苏办事处", "山东办事处", "云南办事处", "宁夏办事处", "广州办事处" };
+        kmpm.init(input);
+        final HashMap<String, String> result = kmpm.paragraph(input);
+        
+        for (final Entry<String, String> cursor : result.entrySet()) {
+            System.out.println(cursor.getKey());
+            System.out.println(cursor.getValue());
+        }
+        */
+
+        final ClosestPair<Integer> cp = new ClosestPair<Integer>();
+        cp.add(1, 0, 3, 1);
+        cp.add(2, 0, 0, 10);
+        cp.add(3, 0, 3, 2);
+        cp.add(4, 0, 2, 3.1);
+        cp.add(5, 0, 9, 5);
+        cp.add(6, 0, 5, 9);
+        cp.add(7, 0, 3, 5);
+        cp.add(8, 0, 4.2, 2.9);
+        cp.add(99, 0, 3, 1);
+        cp.init();
+
+        Vertex<Integer>[] result = new Vertex[2];
+
+        result = cp.forcePickClosestPair();
+
+        System.out.println(result[0].getIndex());
+        System.out.println(result[1].getIndex());
+
+        result = cp.closestPair();
+
+        System.out.println(result[0].getIndex());
+        System.out.println(result[1].getIndex());
+
     }
 
 }
