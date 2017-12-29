@@ -133,7 +133,6 @@ public class ClosestPair<T> {
         int count = 0;
         final List<Vertex<T>> yym = new ArrayList<Vertex<T>>();
 
-        // Put valid vertices from y array into a temp array. Because don't know the size yet.
         for (int i = 0; i < size; i++) {
             if (y.get(i).getX() >= xlr && y.get(i).getX() <= xrr) {
                 yym.add(y.get(i));
