@@ -2,9 +2,13 @@
 Test field for algorithms. Everything algorithmically I suddenly come up with will be implemented and put in here, for fun.
 Currently it includes:
 
+    -Backtracking
+        .EightQueens
+        
     -Computational Geometry:
         .Convex hull wrapping
         .Line intersection detection
+        .Closest pair picking
         
     -Dynamic programming:
         .Dynamic coin changer
