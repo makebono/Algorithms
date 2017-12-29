@@ -1,6 +1,7 @@
 package com.makebono.algorithms.test;
 
 import java.io.IOException;
+import java.util.Random;
 
 import com.makebono.algorithms.computationalgeometry.closestpointpair.ClosestPair;
 import com.makebono.datastructures.graph.Vertex;
@@ -100,42 +101,7 @@ public class TestField {
         System.out.println(xy[0]);
         System.out.println(xy[1]);
          */
-        /*
-        
-        // String matching performance benchmark
-        final KMPMatching kmpm = new KMPMatching("inputSet/kmpHomeCourt.txt");
-        final ForceComparison fc = new ForceComparison("inputSet/kmpHomeCourt.txt");
-        final char[] input = "ababaca".toCharArray();
-        kmpm.init("ababaca");
-        fc.init("ababaca");
-        final int[] pi = KMPMatching.computePrefix("ababaca");
-        
-        int result = 0;
-        
-        double t = System.currentTimeMillis();
-        for (int i = 0; i < 1000000; i++) {
-            result = kmpm.matchByBuildInMethod("ababaca");
-        }
-        t = System.currentTimeMillis() - t;
-        System.out.println("Matching by build-in method takes: " + t / 1000 + "s");
-        System.out.println("Target's index is: " + result);
-        
-        t = System.currentTimeMillis();
-        for (int i = 0; i < 1000000; i++) {
-            result = fc.match(input);
-        }
-        t = System.currentTimeMillis() - t;
-        System.out.println("Matching by optimized force matching takes: " + t / 1000 + "s");
-        System.out.println("Target's index is: " + result);
-        
-        t = System.currentTimeMillis();
-        for (int i = 0; i < 1000000; i++) {
-            result = kmpm.match(input, pi);
-        }
-        t = System.currentTimeMillis() - t;
-        System.out.println("Matching by KMP algorithm takes: " + t / 1000 + "s");
-        System.out.println("Target's index is: " + result);
-        
+        /*             
         // KMPMatching paragraphing
         final KMPMatching kmpm = new KMPMatching("inputSet/output.txt");
         final String[] input = { "西安办事处", "郑州办事处", "江苏办事处", "山东办事处", "云南办事处", "宁夏办事处", "广州办事处" };
@@ -149,29 +115,24 @@ public class TestField {
         */
 
         final ClosestPair<Integer> cp = new ClosestPair<Integer>();
-        cp.add(1, 0, 3, 1);
-        cp.add(2, 0, 0, 10);
-        cp.add(3, 0, 3, 2);
-        cp.add(4, 0, 2, 3.1);
-        cp.add(5, 0, 9, 5);
-        cp.add(6, 0, 5, 9);
-        cp.add(7, 0, 3, 5);
-        cp.add(8, 0, 4.2, 2.9);
-        cp.add(99, 0, 3, 1);
+
+        final Random rnd = new Random();
+        for (int i = 0; i < 10000; i++) {
+            cp.add(i + 1, 0, rnd.nextDouble() * 10, rnd.nextDouble() * 10);
+        }
+
+        double t = System.currentTimeMillis();
+        final Vertex<Integer>[] result = cp.bruteForcePickClosestPair();
+        t = System.currentTimeMillis() - t;
+        System.out.println(
+                "Brute force approch:\nAnswer is: " + result[0].dist(result[1]) + "\nIt takes " + t / 1000 + "s.");
+
+        t = System.currentTimeMillis();
         cp.init();
-
-        Vertex<Integer>[] result = new Vertex[2];
-
-        result = cp.forcePickClosestPair();
-
-        System.out.println(result[0].getIndex());
-        System.out.println(result[1].getIndex());
-
-        result = cp.closestPair();
-
-        System.out.println(result[0].getIndex());
-        System.out.println(result[1].getIndex());
-
+        final Vertex<Integer>[] result2 = cp.closestPair();
+        t = System.currentTimeMillis() - t;
+        System.out.println(
+                "Optimized approch:\nAnswer is: " + result2[0].dist(result2[1]) + "\nIt takes " + t / 1000 + "s.");
     }
 
 }
