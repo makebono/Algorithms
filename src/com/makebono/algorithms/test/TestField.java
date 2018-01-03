@@ -1,10 +1,10 @@
 package com.makebono.algorithms.test;
 
 import java.io.IOException;
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
-import com.makebono.algorithms.computationalgeometry.closestpointpair.ClosestPair;
-import com.makebono.datastructures.graph.Vertex;
+import com.makebono.algorithms.string.patternmatching.knuth_morris_pratt.KMPMatching;
 
 /** 
  * @ClassName: TestField 
@@ -15,7 +15,8 @@ import com.makebono.datastructures.graph.Vertex;
  */
 @SuppressWarnings("unchecked")
 public class TestField {
-    public static void main(final String[] args) throws IOException {
+    public static void main(final String[] args) throws IOException, NoSuchFieldException, SecurityException,
+            IllegalArgumentException, IllegalAccessException {
         /*
         // Maximum network flow
         final Vertex<String> s = new Vertex<String>(0, "Vancouver");
@@ -112,25 +113,15 @@ public class TestField {
         }
         */
 
-        final ClosestPair<Integer> cp = new ClosestPair<Integer>();
+        final KMPMatching kmpm = new KMPMatching("inputSet/output.txt");
+        final String[] input = { "西安办事处", "郑州办事处", "江苏办事处", "山东办事处", "云南办事处", "宁夏办事处", "广州办事处" };
+        kmpm.init(input);
+        final HashMap<String, String> result = kmpm.paragraph(input);
 
-        final Random rnd = new Random();
-        for (int i = 0; i < 10000; i++) {
-            cp.add(i + 1, 0, rnd.nextDouble() * 10, rnd.nextDouble() * 10);
+        for (final Entry<String, String> cursor : result.entrySet()) {
+            System.out.println(cursor.getKey());
+            System.out.println(cursor.getValue());
         }
-
-        double t = System.currentTimeMillis();
-        final Vertex<Integer>[] result = cp.bruteForcePickClosestPair();
-        t = System.currentTimeMillis() - t;
-        System.out.println(
-                "Brute force approch:\nAnswer is: " + result[0].dist(result[1]) + "\nIt takes " + t / 1000 + "s.");
-
-        t = System.currentTimeMillis();
-        cp.init();
-        final Vertex<Integer>[] result2 = cp.closestPair();
-        t = System.currentTimeMillis() - t;
-        System.out.println(
-                "Optimized approch:\nAnswer is: " + result2[0].dist(result2[1]) + "\nIt takes " + t / 1000 + "s.");
     }
 
 }

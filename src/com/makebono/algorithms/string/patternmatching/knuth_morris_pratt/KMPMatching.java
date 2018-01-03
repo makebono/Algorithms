@@ -18,6 +18,7 @@
 package com.makebono.algorithms.string.patternmatching.knuth_morris_pratt;
 
 import java.io.FileNotFoundException;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 
 import com.makebono.algorithms.string.patternmatching.Matching;
@@ -34,6 +35,25 @@ public class KMPMatching extends Matching {
 
     public KMPMatching(final String location) throws FileNotFoundException {
         super(location);
+    }
+
+    public void init(final String... targets)
+            throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+        final StringBuilder temp = this.text;
+        Field f = temp.getClass().getSuperclass().getDeclaredField("value");
+        f.setAccessible(true);
+        this.ttext = (char[]) f.get(temp);
+
+        f = String.class.getDeclaredField("value");
+        f.setAccessible(true);
+
+        this.ttargets = new char[targets.length][];
+        this.piTables = new int[targets.length][];
+        int i = 0;
+        for (final String target : targets) {
+            this.piTables[i] = computePrefix(target);
+            this.ttargets[i++] = (char[]) f.get(target);;
+        }
     }
 
     @Override
@@ -87,22 +107,6 @@ public class KMPMatching extends Matching {
         }
 
         return -1;
-    }
-
-    public void init(final String target) {
-        this.ttext = this.text.toString().toCharArray();
-        this.ttarget = target.toCharArray();
-    }
-
-    public void init(final String... targets) {
-        this.ttext = this.text.toString().toCharArray();
-        this.ttargets = new char[targets.length][];
-        this.piTables = new int[targets.length][];
-        int i = 0;
-        for (final String target : targets) {
-            this.piTables[i] = computePrefix(target);
-            this.ttargets[i++] = target.toCharArray();
-        }
     }
 
     // Calculate prefix function of sub pattern p(k): p(1...k...label.length), p[k] = n means the longest proper prefix

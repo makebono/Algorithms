@@ -22,7 +22,7 @@
  *                                        .       md     |
  *                                                       |
  * This exmaple is an extreme case when distance between pn and pn+1(except p1,p2 p5,p6, in this case they hold the 
- * global minimum) is equally md. Since md is the minimum in both halves, there will not be more than 8 vertices 
+ * global minimum) are equally md. Since md is the minimum in both halves, there will not be more than 8 vertices 
  * in this region formed by 2 squares with side length md like in this case. So we only need to compare 8 vertices 
  * each iteration.
  * After this comparison, we get the minimum in region accross line xm, compare it to md to find the global minimum. 
