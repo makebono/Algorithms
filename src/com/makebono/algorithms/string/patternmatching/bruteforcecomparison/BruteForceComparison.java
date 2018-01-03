@@ -27,11 +27,6 @@ public class BruteForceComparison extends Matching {
 
     }
 
-    public void init(final String target) {
-        this.ttext = this.text.toString().toCharArray();
-        this.ttarget = target.toCharArray();
-    }
-
     public void init(final String... targets) {
         this.ttext = this.text.toString().toCharArray();
         this.ttargets = new char[targets.length][];

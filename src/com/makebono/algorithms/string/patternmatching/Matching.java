@@ -2,6 +2,7 @@ package com.makebono.algorithms.string.patternmatching;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -27,6 +28,18 @@ public abstract class Matching {
         }
         data.close();
     }
+
+    public void init(final String target)
+            throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+        final StringBuilder temp = this.text;
+        final Field f = temp.getClass().getSuperclass().getDeclaredField("value");
+        f.setAccessible(true);
+        this.ttext = (char[]) f.get(temp);
+        this.ttarget = (char[]) f.get(target);
+    }
+
+    public abstract void init(final String... targets)
+            throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException;
 
     public abstract HashMap<String, String> paragraph(final String... labels);
 
