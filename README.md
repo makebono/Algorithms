@@ -29,6 +29,10 @@ Currently it includes:
     -Flow network
         .Ford-Fulkerson method for maximum flow
         
+    -Pattern matching
+        .Brute force matching
+        .Knuth Morris Pratt algorithm
+    
     -Pathfinder
         .A* algorithm based path finder
     
