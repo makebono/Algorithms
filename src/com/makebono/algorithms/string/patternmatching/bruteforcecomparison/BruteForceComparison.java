@@ -5,7 +5,7 @@
  * case complexity is o((n-m+1)m) (in such case, every next char in text is same as the first char of the label but 
  * the rest part never matchs).
  * 
- * Notice this is slower than using build-in method String.indexOf().
+ * Faster than using build-in method String.indexOf().
  */
 package com.makebono.algorithms.string.patternmatching.bruteforcecomparison;
 
@@ -27,6 +27,7 @@ public class BruteForceComparison extends Matching {
 
     }
 
+    @Override
     public void init(final String... targets) {
         this.ttext = this.text.toString().toCharArray();
         this.ttargets = new char[targets.length][];

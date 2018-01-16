@@ -70,7 +70,7 @@ import com.makebono.datastructures.matrix.matrixinterface.Matrix;
 public class HungarianWorkDistributor {
     private final Matrix table;
 
-    // Use it workerNum is to be equal as workNum, but I'm too lazy to change it.
+    // workerNum is to be equal as workNum, but I'm too lazy to change it.
     private int workerNum;
     private int workNum;
     private final int workerCapacity;
