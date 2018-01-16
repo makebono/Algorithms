@@ -11,9 +11,6 @@
  *  0 means no possible match for shift within p.length.
  *   
  *  Matching part takes around o(n) * [(at most o(m-1)) -> for while loop at line 59 down below.] 
- *  
- *  It's still slower than using indexOf() building method. I must have missed something. Will be back for further
- *  tuning. 
  */
 package com.makebono.algorithms.string.patternmatching.knuth_morris_pratt;
 
@@ -37,6 +34,7 @@ public class KMPMatching extends Matching {
         super(location);
     }
 
+    @Override
     public void init(final String... targets)
             throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
         final StringBuilder temp = this.text;

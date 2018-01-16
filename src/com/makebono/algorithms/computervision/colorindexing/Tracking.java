@@ -13,8 +13,8 @@
  *     After optimization, the time takes for the convolution dropped from 70secs to 1sec. Boo! 
  *     
  * Instruction:
- *     final ImageMatrix desk = new ImageMatrix("desk.jpg");
- *     final ImageMatrix bottle = new ImageMatrix("bottle.png");
+ *     final ImageMatrix desk = new ImageMatrix("inputSet/desk2.png");
+ *     final ImageMatrix bottle = new ImageMatrix("inputSet/charger.png");
  *     Tracking.backProjection(bottle, desk);
  */
 package com.makebono.algorithms.computervision.colorindexing;

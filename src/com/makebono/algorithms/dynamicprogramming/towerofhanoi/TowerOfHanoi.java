@@ -7,7 +7,7 @@
  * 
  * Instruction:
  *     final TowerOfHanoi toh = new TowerOfHanoi(7);
- *     toh.game(7, 1, 3);
+ *     toh.game(1, 3);
  */
 package com.makebono.algorithms.dynamicprogramming.towerofhanoi;
 
@@ -105,9 +105,13 @@ public class TowerOfHanoi {
         return this.getRod();
     }
 
+    public void game(final int home, final int target) throws IOException {
+        this.game(this.height, home, target);
+    }
+
     // Users deploy the algorithm here. Higher tier will not possible to print so it will also generate output text
     // file.
-    public void game(final int size, final int home, final int target) throws IOException {
+    public void game(final int height, final int home, final int target) throws IOException {
         final StringBuilder result = new StringBuilder();
         result.append("Solution_Of_");
         result.append(this.getHeight());
@@ -119,7 +123,7 @@ public class TowerOfHanoi {
             final StringBuilder stepFile = new StringBuilder();
             stepFile.append("Initial state: \n");
             stepFile.append(this.toString() + "\n\n\n");
-            this.setRod(solve(size, home, target));
+            this.setRod(solve(height, home, target));
 
             int counter = 0;
             for (final String str : steps) {
