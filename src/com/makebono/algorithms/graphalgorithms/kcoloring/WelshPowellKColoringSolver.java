@@ -10,13 +10,9 @@
 package com.makebono.algorithms.graphalgorithms.kcoloring;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
-import com.makebono.datastructures.graph.BonoGraph;
 import com.makebono.datastructures.graph.Edge;
 import com.makebono.datastructures.graph.Vertex;
-import com.makebono.datastructures.graph.graphInterface.Graph;
-import com.makebono.datastructures.tools.graphcomparator.VertexDegreeComparator;
 
 /** 
  * @ClassName: WelshPowellKColoringSolver 
@@ -25,17 +21,9 @@ import com.makebono.datastructures.tools.graphcomparator.VertexDegreeComparator;
  * @date 2018年1月16日 上午8:58:19 
  *  
  */
-public class WelshPowellKColoringSolver {
-    private static final int a = 97;
-    private int k;
-    private final Graph<Character> graph;
-    boolean colored = false;
-    Comparator<Vertex<Character>> sidekick = new VertexDegreeComparator<Character>();
+public class WelshPowellKColoringSolver extends AbstractKColoringPortal {
 
-    public WelshPowellKColoringSolver() {
-        this.graph = new BonoGraph<Character>();
-    }
-
+    @Override
     public void dealWithIt() {
         boolean colorAssigned = false;
         this.k = 0;
@@ -63,6 +51,8 @@ public class WelshPowellKColoringSolver {
                     final Vertex<Character> child = edges.getV2();
                     if (child == sameColorCandidate) {
                         magicalTokarev = false;
+                        // No need to continue while same color candidate found.
+                        break;
                     }
                 }
 
@@ -81,33 +71,4 @@ public class WelshPowellKColoringSolver {
         this.colored = true;
     }
 
-    public Graph<Character> getGraph() {
-        return this.graph;
-    }
-
-    public void add(final Vertex<Character> v1, final Vertex<Character> v2) {
-        v1.setData('〇');
-        v2.setData('〇');
-        this.graph.add(v1, v2);
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        if (this.colored) {
-            sb.append(this.k + "-Coloring completed. A brief view of the graph is:\nEdges:\n    ");
-        } else {
-            sb.append("Not colored yet. A brief view of the graph is:\nEdges:\n    ");
-        }
-
-        for (final Edge<Character> cursor : this.graph.getEdges()) {
-            sb.append("Edge(V" + cursor.getV1().getIndex() + ", V" + cursor.getV2().getIndex() + ") ");
-        }
-        sb.append("\nVertices:\n    ");
-        for (final Vertex<Character> cursor : this.graph.getVertices()) {
-            sb.append("V" + cursor.getIndex() + "(" + cursor.getData() + ") ");
-        }
-        return sb.toString();
-    }
 }
