@@ -22,14 +22,15 @@ public class BackTrackingKColoringSolver extends AbstractKColoringPortal {
     public void dealWithIt() {
         this.k = 0;
         final List<Vertex<Character>> vertices = this.graph.getVertices();
-        // Sort vertices on index order.
+        // Sort vertices by index.
         vertices.sort(this.sidekick);
         // System.out.println(vertices);
         final int size = vertices.size();
-        // Record the parents of each vertex.
+        // Record the parents and children of each vertex.
         final int[][] parentTable = new int[size][size];
         final int[][] childTable = new int[size][size];
 
+        // Initialize the parent and children table.
         for (final Vertex<Character> cursor : vertices) {
             for (final Edge<Character> edges : cursor.getEdges()) {
                 parentTable[edges.getV2().getIndex() - 1][cursor.getIndex() - 1] = 1;
@@ -42,6 +43,7 @@ public class BackTrackingKColoringSolver extends AbstractKColoringPortal {
             final Vertex<Character> cursor = vertices.get(i);
             int n = 0;
 
+            // Loop until a legit coloring is found.
             while (n < size) {
                 // System.out.println("がおーココアさん、食べちゃいますよー");
 
@@ -51,6 +53,8 @@ public class BackTrackingKColoringSolver extends AbstractKColoringPortal {
                     cursor.setData(Character.toChars(a + this.k)[0]);
                     boolean magicalTokarev = false;
 
+                    // Compare current candidate to it's children and parents. Back track on value of n if needed.
+                    // Increase value of k by each failed coloring attempt.
                     if (parentTable[i][n] == 1) {
                         final Vertex<Character> parent = vertices.get(n);
 
@@ -64,6 +68,7 @@ public class BackTrackingKColoringSolver extends AbstractKColoringPortal {
 
                     if (childTable[i][n] == 1) {
                         final Vertex<Character> child = vertices.get(n);
+
                         if (cursor.getData() == child.getData() && child.getData() != '〇') {
                             n = 0;
                             k++;
@@ -72,12 +77,12 @@ public class BackTrackingKColoringSolver extends AbstractKColoringPortal {
                         }
                     }
 
+                    // Currently the assigned color seems to be good, move on to next.
                     if (!magicalTokarev) {
                         n++;
                     }
                 }
             }
-
         }
         this.colored = true;
     }
