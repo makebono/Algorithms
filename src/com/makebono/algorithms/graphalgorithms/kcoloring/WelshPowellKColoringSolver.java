@@ -5,7 +5,7 @@
  * 3. Find vertices which are not attached to newly colored vertices, color it with k-th color as well.
  * 4. k++, repeat step 2 and 3 until all vertices colored.
  * 
- * Instruction in WPKCDemo.java
+ * Instruction in KCDemo.java
  */
 package com.makebono.algorithms.graphalgorithms.kcoloring;
 
@@ -42,13 +42,13 @@ public class WelshPowellKColoringSolver extends AbstractKColoringPortal {
         for (int i = 0; i < size; i++) {
             colorAssigned = false;
             final Vertex<Character> cursor = vertices.get(i);
-            final List<Vertex<Character>> colored = new ArrayList<Vertex<Character>>();
+            final List<Vertex<Character>> coloredVertices = new ArrayList<Vertex<Character>>();
 
             if (cursor.getData() == '〇') {
                 // System.out.println("Boo! New color assigned for " + cursor);
                 cursor.setData(Character.toChars(a + this.k)[0]);
                 colorAssigned = true;
-                colored.add(cursor);
+                coloredVertices.add(cursor);
             }
 
             for (int n = i + 1; n < size; n++) {
@@ -56,7 +56,7 @@ public class WelshPowellKColoringSolver extends AbstractKColoringPortal {
                 // System.out.println(cursor + " with " + sameColorCandidate);
                 boolean magicalTokarev = true;
 
-                for (final Vertex<Character> tempCursor : colored) {
+                for (final Vertex<Character> tempCursor : coloredVertices) {
                     for (final Edge<Character> edges : tempCursor.getEdges()) {
                         final Vertex<Character> child = edges.getV2();
                         if (child == sameColorCandidate) {
@@ -71,10 +71,11 @@ public class WelshPowellKColoringSolver extends AbstractKColoringPortal {
                     // System.out.println(sameColorCandidate);
                     if (sameColorCandidate.getData() == '〇') {
                         sameColorCandidate.setData(Character.toChars(a + this.k)[0]);
-                        colored.add(sameColorCandidate);
+                        coloredVertices.add(sameColorCandidate);
                     }
                 }
             }
+
             if (colorAssigned) {
                 this.k++;
             }
