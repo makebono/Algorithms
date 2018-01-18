@@ -15,6 +15,11 @@ Currently it includes:
         .Fibonacci number calculator
         .Tower of Hanoi solver
     
+    -Graph algorithm:
+        .K-Coloring
+            .Welsh-Powell's algorithm
+            .Back-tracking based k-coloring
+    
     -Greedy algorithm:
         .Greedy coin changer
         .Huffman encoding and decoding
