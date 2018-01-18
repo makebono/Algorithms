@@ -17,8 +17,8 @@ Currently it includes:
     
     -Graph algorithm:
         .K-Coloring
-            .Welsh-Powell's algorithm
-            .Back-tracking based k-coloring
+            ..Welsh-Powell's algorithm
+            ..Back-tracking based k-coloring
     
     -Greedy algorithm:
         .Greedy coin changer
