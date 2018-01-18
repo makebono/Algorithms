@@ -1,12 +1,13 @@
 package com.makebono.algorithms.graphalgorithms.kcoloring;
 
 import java.util.Comparator;
+import java.util.List;
 
 import com.makebono.datastructures.graph.BonoGraph;
 import com.makebono.datastructures.graph.Edge;
 import com.makebono.datastructures.graph.Vertex;
 import com.makebono.datastructures.graph.graphInterface.Graph;
-import com.makebono.datastructures.tools.graphcomparator.VertexDegreeComparator;
+import com.makebono.datastructures.tools.graphcomparator.VertexIndexComparator;
 
 /** 
  * @ClassName: AbstractKColoringPortal 
@@ -20,7 +21,7 @@ public abstract class AbstractKColoringPortal {
     protected int k;
     protected Graph<Character> graph;
     protected boolean colored = false;
-    protected Comparator<Vertex<Character>> sidekick = new VertexDegreeComparator<Character>();
+    protected Comparator<Vertex<Character>> sidekick;
 
     public AbstractKColoringPortal() {
         this.graph = new BonoGraph<Character>();
@@ -43,8 +44,8 @@ public abstract class AbstractKColoringPortal {
         final StringBuilder sb = new StringBuilder();
 
         if (this.colored) {
-            sb.append(this.getClass().getSimpleName() + " based " + this.k
-                    + "-Coloring completed. A brief view of the graph is:\nEdges:\n    ");
+            sb.append(this.getClass().getSimpleName() + " based "
+                    + "k-Coloring completed. A brief view of the graph is:\nEdges:\n    ");
         } else {
             sb.append("Not colored yet. A brief view of the graph is:\nEdges:\n    ");
         }
@@ -53,7 +54,12 @@ public abstract class AbstractKColoringPortal {
             sb.append("Edge(V" + cursor.getV1().getIndex() + ", V" + cursor.getV2().getIndex() + ") ");
         }
         sb.append("\nVertices:\n    ");
-        for (final Vertex<Character> cursor : this.graph.getVertices()) {
+
+        final List<Vertex<Character>> list = this.graph.getVertices();
+        // Sort the vertices by index ordered. More comprehensive to see and debug.
+        list.sort(new VertexIndexComparator<Character>());
+
+        for (final Vertex<Character> cursor : list) {
             sb.append("V" + cursor.getIndex() + "(" + cursor.getData() + ") ");
         }
         return sb.toString();

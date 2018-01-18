@@ -19,6 +19,8 @@
  */
 package com.makebono.algorithms.computervision.colorindexing;
 
+import static com.makebono.algorithms.tools.computervision.Display.imshow;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -26,7 +28,6 @@ import java.awt.geom.RoundRectangle2D;
 import java.io.IOException;
 
 import com.makebono.algorithms.tools.computervision.Convolution;
-import com.makebono.algorithms.tools.computervision.Display;
 import com.makebono.algorithms.tools.computervision.matrix.ImageMatrix;
 import com.makebono.algorithms.tools.computervision.matrix.Maximum;
 
@@ -82,7 +83,7 @@ public class Tracking {
         System.out.println("Times cost for finding maximum is: " + t / 1000);
 
         t = System.currentTimeMillis();
-        final Graphics2D g2d = Display.imshow(environment.image(), "Result").createGraphics();
+        final Graphics2D g2d = imshow(environment.image(), "Result").createGraphics();
 
         // Draw a circle at maxM,maxN
         g2d.setColor(Color.RED);
@@ -92,6 +93,6 @@ public class Tracking {
         t = System.currentTimeMillis() - t;
         System.out.println("Times cost for drawing on image is: " + t / 1000);
 
-        Display.imshow(target.image(), "Target for track");
+        imshow(target.image(), "Target for track");
     }
 }
