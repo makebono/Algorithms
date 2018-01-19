@@ -56,7 +56,7 @@ public abstract class AbstractKColoringPortal {
         sb.append("\nVertices:\n    ");
 
         final List<Vertex<Character>> list = this.graph.getVertices();
-        // Sort the vertices by index ordered. More comprehensive to see and debug.
+        // Sort the vertices by index ordered. More comprehensible to see and debug.
         list.sort(new VertexIndexComparator<Character>());
 
         for (final Vertex<Character> cursor : list) {

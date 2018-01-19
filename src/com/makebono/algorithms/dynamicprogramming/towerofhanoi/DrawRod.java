@@ -1,4 +1,4 @@
-/* It's funny.
+/** It's funny.
  */
 
 package com.makebono.algorithms.dynamicprogramming.towerofhanoi;

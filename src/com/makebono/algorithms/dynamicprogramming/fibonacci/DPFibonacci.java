@@ -1,9 +1,9 @@
 /** Notes: 
- * 1. It seems like bigDecimal is way faster than long, and more accurate. As for fib(40), long takes 2.8s while bigDecimal takes like 1.8s
- * 2. Trivial DP has exponential complexity, it's within O(2^n)
- * 3. With a table recording calculated sub cases can dramatically boost efficiency. For this particular case, it's O(n) with O(n) space requirement for the table. 
- * 4. Akebono kawaii.
- */
+* 1. It seems like BigDecimal is way faster than long, and more accurate. As for fib(40), long takes 2.8s while bigDecimal takes like 1.8s
+* 2. Trivial DP has exponential complexity, it's within O(2^n)
+* 3. With a table recording calculated sub cases can dramatically boost efficiency. For this particular case, it's O(n) with O(n) space requirement for the table. 
+* 4. Akebono kawaii.
+*/
 package com.makebono.algorithms.dynamicprogramming.fibonacci;
 
 import java.math.BigDecimal;
