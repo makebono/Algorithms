@@ -24,8 +24,7 @@ public class WeekDaysCalculatorImpl implements DoomsdayCalculator {
         final int yearIn2Digits = Integer.valueOf(date.substring(2, 4));
         int anchor = 0;
 
-        // Every 400 years is a cycle. If need to support input out of this range, simply modified here.
-        // i.e. x-1800 %
+        // Every 400 years is a cycle. If need to support input out of this range, simply modify here.
         if (year >= 1800 && year <= 1899) {
             anchor = Doomsdays.Anchor1;
         } else if (year >= 1900 && year <= 1999) {

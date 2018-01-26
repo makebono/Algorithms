@@ -7,7 +7,7 @@ import com.makebono.algorithms.tools.computervision.matrix.ImageMatrix;
 /** 
  * @ClassName: CIDemo 
  * @Description: Demo of Swain&Ballard's color-indexing
- * @author tangxj
+ * @author makebono
  * @date 2018年1月16日 下午4:35:57 
  *  
  */
