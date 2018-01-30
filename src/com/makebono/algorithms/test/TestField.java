@@ -2,7 +2,7 @@ package com.makebono.algorithms.test;
 
 import java.io.IOException;
 
-import com.makebono.algorithms.computervision.colorindexing.CIDemo;
+import com.makebono.algorithms.astronomy.doomsdayrule.DDDemo;
 
 /** 
  * @ClassName: TestField 
@@ -14,7 +14,7 @@ import com.makebono.algorithms.computervision.colorindexing.CIDemo;
 public class TestField {
     public static void main(final String[] args) throws IOException, NoSuchFieldException, SecurityException,
             IllegalArgumentException, IllegalAccessException {
-        CIDemo.show();
+        DDDemo.show("20171201");
     }
 
 }

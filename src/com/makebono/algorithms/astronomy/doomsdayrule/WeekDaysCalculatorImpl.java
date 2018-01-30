@@ -5,6 +5,8 @@
  */
 package com.makebono.algorithms.astronomy.doomsdayrule;
 
+import java.security.InvalidParameterException;
+
 import com.makebono.algorithms.astronomy.doomsdayrule.doomsdays.Doomsdays;
 import com.makebono.algorithms.astronomy.doomsdayrule.weekdayscalculatorinterface.DoomsdayCalculator;
 import com.makebono.algorithms.tools.dateenum.MonthEnum;
@@ -38,7 +40,10 @@ public class WeekDaysCalculatorImpl implements DoomsdayCalculator {
         return (yearIn2Digits / 12 + yearIn2Digits % 12 + (yearIn2Digits % 12) / 4 + anchor) % 7;
     }
 
-    private String calculateWeekdays(final String date) {
+    private String calculateWeekdays(final String date) throws InvalidParameterException {
+        if (date.length() != 8) {
+            throw new InvalidParameterException("Invalid input. Please double check.");
+        }
         final int doomsday = this.calculateDoomsday(date);
 
         final String year = date.substring(0, 4);
@@ -113,7 +118,7 @@ public class WeekDaysCalculatorImpl implements DoomsdayCalculator {
             result = (doomsday + (day - dayOfDoom)) % 7;
         } else {
             result = doomsday - (dayOfDoom - day) > 0 ? doomsday - (dayOfDoom - day)
-                    : (doomsday - (dayOfDoom - day) + 7) % 7;
+                    : (doomsday - (dayOfDoom - day)) % 7 + 7;
         }
 
         return "Date input " + MonthEnum.getByInt(Integer.valueOf(month)) + " " + dayString + " " + year + " is "
