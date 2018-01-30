@@ -20,12 +20,12 @@ import java.util.Arrays;
 public class EightQueens {
 
     // Put the first queen at 0,0 and start solving.
-    public static void solve() {
+    public static String solve() {
         final int[] entries = new int[64];
         Arrays.fill(entries, 0);
         solve(entries, 0);
         System.out.println("Solution is: ");
-        print(entries);
+        return print(entries);
     }
 
     private static boolean solve(final int[] entries, final int n) {
@@ -138,7 +138,7 @@ public class EightQueens {
         return m * 8 + n;
     }
 
-    public static void print(final int[] entries) {
+    public static String print(final int[] entries) {
         final StringBuilder sb = new StringBuilder();
 
         for (int m = 0; m < 8; m++) {
@@ -150,5 +150,6 @@ public class EightQueens {
         }
 
         System.out.println(sb.toString());
+        return sb.toString();
     }
 }
