@@ -65,6 +65,30 @@ public abstract class ConvexHullGenerator<T> {
         return target;
     }
 
+    public Vertex<T> minimumX() {
+        Vertex<T> target = this.getGraph().getVertices().get(0);
+
+        for (final Vertex<T> temp : this.getGraph().getVertices()) {
+            if (temp.getX() < target.getX()) {
+                target = temp;
+            }
+        }
+
+        return target;
+    }
+
+    protected Vertex<T> maximumX() {
+        Vertex<T> target = this.getGraph().getVertices().get(0);
+
+        for (final Vertex<T> temp : this.getGraph().getVertices()) {
+            if (temp.getX() > target.getX()) {
+                target = temp;
+            }
+        }
+
+        return target;
+    }
+
     // Return an array list of edge of the convex hull.
     public HullContainer<T> convexHull() {
         final ArrayList<Edge<T>> hull = new ArrayList<Edge<T>>();

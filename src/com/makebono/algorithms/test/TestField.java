@@ -2,7 +2,8 @@ package com.makebono.algorithms.test;
 
 import java.io.IOException;
 
-import com.makebono.algorithms.astronomy.doomsdayrule.DDDemo;
+import com.makebono.algorithms.computationalgeometry.convexhull.quickhull.QHDemo;
+import com.makebono.algorithms.computationalgeometry.convexhull.jarvismarch.JMDemo;
 
 /** 
  * @ClassName: TestField 
@@ -14,7 +15,8 @@ import com.makebono.algorithms.astronomy.doomsdayrule.DDDemo;
 public class TestField {
     public static void main(final String[] args) throws IOException, NoSuchFieldException, SecurityException,
             IllegalArgumentException, IllegalAccessException {
-        DDDemo.show("20171201");
+        QHDemo.show();
+        JMDemo.show();
     }
 
 }
