@@ -18,6 +18,7 @@ public class Line {
     private final BigDecimal y2;
     private BigDecimal k;
     private BigDecimal b;
+    private boolean isVertical = false;
 
     public Line(final double x1, final double y1, final double x2, final double y2) {
         this.x1 = new BigDecimal(Double.toString(x1)).setScale(6, BigDecimal.ROUND_HALF_UP);
@@ -28,9 +29,24 @@ public class Line {
         this.calculate();
     }
 
+    public Line(final double k, final double b) {
+        this.k = new BigDecimal(Double.toString(k)).setScale(6, BigDecimal.ROUND_HALF_UP);
+        this.b = new BigDecimal(Double.toString(b)).setScale(6, BigDecimal.ROUND_HALF_UP);
+
+        this.x1 = BigDecimal.ZERO.setScale(6, BigDecimal.ROUND_HALF_UP);
+        this.y1 = this.b;
+
+        this.y2 = BigDecimal.ZERO.setScale(6, BigDecimal.ROUND_HALF_UP);
+        this.x2 = BigDecimal.ZERO.subtract(this.b).divide(this.k).setScale(6, BigDecimal.ROUND_HALF_UP);
+    }
+
     private void calculate() {
-        this.k = (this.y2.subtract(this.y1)).divide(this.x2.subtract(this.x1), 6, BigDecimal.ROUND_HALF_UP);
-        this.b = this.y1.subtract(this.x1.multiply(this.k)).setScale(6);
+        if (this.x1.equals(this.x2)) {
+            this.isVertical = true;
+        } else {
+            this.k = (this.y2.subtract(this.y1)).divide(this.x2.subtract(this.x1), 6, BigDecimal.ROUND_HALF_UP);
+            this.b = this.y1.subtract(this.x1.multiply(this.k)).setScale(6);
+        }
     }
 
     public boolean isOn(final double x, final double y) {
@@ -53,6 +69,18 @@ public class Line {
         }
     }
 
+    public BigDecimal distTo(final double xi, final double yi) {
+        final BigDecimal x = new BigDecimal(Double.toString(xi)).setScale(6, BigDecimal.ROUND_HALF_UP);
+        final BigDecimal y = new BigDecimal(Double.toString(yi)).setScale(6, BigDecimal.ROUND_HALF_UP);
+        if (!isVertical) {
+            final BigDecimal temp1 = (this.k.multiply(x).subtract(y).add(this.b)).setScale(6, BigDecimal.ROUND_HALF_UP);
+            final BigDecimal temp2 = BigDecimalSqrt.sqrt(this.k.multiply(this.k).add(BigDecimal.ONE), 6);
+
+            return temp1.divide(temp2, BigDecimal.ROUND_HALF_UP).abs();
+        }
+        return this.x1.subtract(x).setScale(6, BigDecimal.ROUND_HALF_UP).abs();
+    }
+
     public BigDecimal k() {
         return this.k;
     }
@@ -65,6 +93,13 @@ public class Line {
         final BigDecimal kx = this.k.multiply(x).setScale(6, BigDecimal.ROUND_HALF_UP);
         final BigDecimal kxb = kx.add(this.b).setScale(6, BigDecimal.ROUND_HALF_UP);
         return kxb;
+    }
+
+    public boolean isAbove(final double xi, final double yi) {
+        final BigDecimal x = new BigDecimal(Double.toString(xi)).setScale(6, BigDecimal.ROUND_HALF_UP);
+        final BigDecimal y = new BigDecimal(Double.toString(yi)).setScale(6, BigDecimal.ROUND_HALF_UP);
+
+        return y.compareTo(this.YAt(x)) > 0 ? true : false;
     }
 
     public BigDecimal maxX() {
@@ -81,5 +116,21 @@ public class Line {
 
     public BigDecimal minXY() {
         return (this.x1.compareTo(this.x2)) < 0 ? y1 : y2;
+    }
+
+    public BigDecimal getX1() {
+        return this.x1;
+    }
+
+    public BigDecimal getX2() {
+        return this.x2;
+    }
+
+    public BigDecimal getY1() {
+        return this.y1;
+    }
+
+    public BigDecimal getY2() {
+        return this.y2;
     }
 }
