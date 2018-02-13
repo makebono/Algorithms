@@ -2,8 +2,9 @@ package com.makebono.algorithms.test;
 
 import java.io.IOException;
 
-import com.makebono.algorithms.computationalgeometry.convexhull.quickhull.QHDemo;
+import com.makebono.algorithms.computationalgeometry.convexhull.grahamscan.GSDemo;
 import com.makebono.algorithms.computationalgeometry.convexhull.jarvismarch.JMDemo;
+import com.makebono.algorithms.computationalgeometry.convexhull.quickhull.QHDemo;
 
 /** 
  * @ClassName: TestField 
@@ -17,6 +18,7 @@ public class TestField {
             IllegalArgumentException, IllegalAccessException {
         QHDemo.show();
         JMDemo.show();
+        GSDemo.show();
     }
 
 }
