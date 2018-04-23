@@ -1,5 +1,5 @@
 /**Note:
- *    Say '1/sqrt(y)' is is a root of f(y) = (1/(y^2)) - x, f'(y) = -2/(y)^3
+ *    Say '1/sqrt(x)' is is a root of f(y) = (1/(y^2)) - x = 0, f'(y) = -2/(y)^3
  *    y(n+1) = y(n) - (1/(y(n)^2) - x)/(-2/(y)^3)
  *           .
  *           .
