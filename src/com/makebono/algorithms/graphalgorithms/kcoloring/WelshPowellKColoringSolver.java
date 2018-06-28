@@ -58,6 +58,7 @@ public class WelshPowellKColoringSolver extends AbstractKColoringPortal {
 
                 for (final Vertex<Character> tempCursor : coloredVertices) {
                     for (final Edge<Character> edges : tempCursor.getEdges()) {
+                        // Should check if they are connected (a->b or b->a, here I am only checking a->b). Need to be modified.
                         final Vertex<Character> child = edges.getV2();
                         if (child == sameColorCandidate) {
                             magicalTokarev = false;
