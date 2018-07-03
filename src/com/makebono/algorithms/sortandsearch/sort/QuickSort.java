@@ -27,15 +27,13 @@ public class QuickSort implements Sorter {
     private int partition(final int begin, final int end, final int[] input) {
         int pivot = begin;
 
-        for (int i = begin; i < end; i++) {
             // Swap once a time, that's why using continue.
-            for (int n = begin; n < end; n++) {
-                if ((input[n] < input[pivot] && pivot < n) || (input[n] > input[pivot] && pivot > n)) {
-                    Swapper.swap(n, pivot, input);
-                    pivot = n;
-                    continue;
-                }
-            }
+        for (int n = begin; n < end; n++) {
+        	if ((input[n] < input[pivot] && pivot < n) || (input[n] > input[pivot] && pivot > n)) {
+        		Swapper.swap(n, pivot, input);
+        		pivot = n;
+        		continue;
+        	}
         }
 
         return pivot;
